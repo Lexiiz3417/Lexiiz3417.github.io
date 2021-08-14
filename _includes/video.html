@@ -1,0 +1,17 @@
+<div id="video" class="section section-presskit parallax-container scrollspy">
+<div class="parallax"><img src="assets/images/video.jpg" alt="background"></div>
+<div class="qt-polydecor poly4">
+<div class="container">
+<div class="qt-framed center-align" data-100p-top="opacity:0;" data-80p-top="opacity:0;" data-30p-top="opacity:1;">
+    {% for yt in site.data.data.yt %}
+<h2 class="qt-section-title">{{ yt.title }}<i class="deco"></i></h2>
+<h4 class="center-align">{{ yt.desc }}</h4>
+<p class="center-align">
+<a class="btn waves-effect waves-light btn-large" href="{{ yt.link }}" target="_blank">{{ yt.btn }}</a>
+</p>
+{% endfor %}
+</div>
+</div>
+</div>
+<div class="qt-particles" id="particlesbio" data-color="#ffffff" data-opacity="0.9" data-speed="1"></div>
+</div>

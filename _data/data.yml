@@ -1,0 +1,45 @@
+---
+
+sosmed:
+  -
+    link: 
+    icons: qticon-youtube
+  -
+    link:
+    icons: qticon-twitter
+  - 
+    link:
+    icons: qticon-facebook
+  -
+    link:
+    icons: qticon-soundcloud
+  -
+    link:
+    icons: qticon-instagram
+
+# Preskit
+preskit:
+- 
+  title: Songs
+  desc: You can download my free song here
+  btn: Download
+  link: link
+
+
+# Video
+yt:
+- 
+  title: Video
+  desc: Checkout our video on youtube
+  btn: View
+  link: https://www.youtube.com/channel/UC81BShm8sJBOIUvXnBKmRww
+
+# Bio Text
+bio:
+- 
+  title: Carrer
+  desc: Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo.
+
+-
+  title: Collab
+  desc: Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo.

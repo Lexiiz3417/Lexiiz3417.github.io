@@ -1,0 +1,14 @@
+<div id="bio" class="section section-bio parallax-container qt-fullscreen scrollspy">
+<div class="parallax"><img src="assets/images/bio.jpg" alt="background"></div>
+<div class="container">
+<div class="qt-framed flow-text" data-100p-top="opacity:0;" data-80p-top="opacity:0;" data-30p-top="opacity:1;">
+<h2 class="qt-section-title">BIO<i class="deco"></i></h2>
+<div class="content qt-polydecor poly2">
+{% for bio in site.data.data.bio %}
+<h4>{{ bio.title }}</h4>
+{{ bio.desc }}
+{% endfor %}
+</div>
+</div>
+</div>
+</div>

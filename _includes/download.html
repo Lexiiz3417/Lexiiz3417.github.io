@@ -1,0 +1,17 @@
+<div id="presskit" class="section section-presskit parallax-container scrollspy">
+<div class="parallax"><img src="assets/images/bioa.jpg" alt="background"></div>
+<div class="qt-polydecor poly4">
+<div class="container">
+<div class="qt-framed center-align" data-100p-top="opacity:0;" data-80p-top="opacity:0;" data-30p-top="opacity:1;">
+	{% for down in site.data.data.preskit %}
+<h2 class="qt-section-title">{{ down.title }}<i class="deco"></i></h2>
+<h4 class="center-align">{{ down.desc }}</h4>
+<p class="center-align">
+<a class="btn waves-effect waves-light btn-large" href="{{ down.link }}" target="_blank">{{ down.btn }}</a>
+</p>
+{% endfor %}
+</div>
+</div>
+</div>
+<div class="qt-particles" id="particlesbio" data-color="#ffffff" data-opacity="0.9" data-speed="1"></div>
+</div>

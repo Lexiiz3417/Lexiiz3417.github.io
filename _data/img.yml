@@ -1,0 +1,13 @@
+---
+
+
+# Galery
+
+ galery:
+  - url: assets/images/gallery1.jpg
+  - url: assets/images/gallery2.jpg
+  - url: assets/images/gallery3.jpg
+  - url: assets/images/gallery4.jpg
+  - url: assets/images/gallery5.jpg
+  - url: assets/images/gallery6.jpg
+  - url: assets/images/gallery7.jpg

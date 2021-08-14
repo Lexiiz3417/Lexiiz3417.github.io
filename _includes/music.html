@@ -1,0 +1,34 @@
+<div id="music" class="section section-music parallax-container scrollspy">
+<div class="parallax">
+    <img src="assets/images/music.jpg" alt="background">
+</div>
+<h2 class="qt-section-title" data-100p-top="opacity:0;" data-80p-top="opacity:0;" data-50p-top="opacity:1;" data-30p-top="opacity:1;" data-8p-top="opacity:1;" data-0p-top="opacity:0;">MUSIC<i class="deco"></i></h2>
+<div id="carouselmusic" class="qt-gridstackCarousel-container">
+
+<div class="carousel qt-gridstackCarousel" data-vpadding="50" data-time_constant="500" data-dist="-30" data-shift="-20" data-padding="20" data-full_width="0" data-100p-top="opacity:0;" data-80p-top="opacity:0;" data-50p-top="opacity:1;" data-30p-top="opacity:1;" data-top-bottom="opacity:0;">
+{% for ncore in site.data.sc %}
+<div class="carousel-item">
+<img src="{{ ncore.thumb }}" width="300" height="300" alt="Album title">
+<h5>{{ ncore.title }}</h5>
+<a href="#modal1" class="btn modal-trigger" data-iframe="https://w.soundcloud.com/player/?url=https%3A//api.soundcloud.com/tracks/{{ ncore.track }}&amp;color=ff5500&amp;auto_play=false&amp;hide_related=false&amp;show_comments=true&amp;show_user=true&amp;show_reposts=false"><span class="lnr lnr-music-note"></span></a>
+</div>
+{% endfor %}
+</div>
+<div class="nav hide-on-med-and-down">
+<a class="prev" href="#">
+<span class="lnr lnr-arrow-left-circle"></span>
+</a>
+<a class="next" href="#">
+<span class="lnr lnr-arrow-right-circle"></span>
+</a>
+</div>
+
+</div>
+</div>
+
+
+<div id="modal1" class="modal bottom-sheet">
+<div class="modal-content">
+<iframe id="modalframe" class="qt-modalframe" src="assets/images/logo.png"></iframe>
+</div>
+</div>

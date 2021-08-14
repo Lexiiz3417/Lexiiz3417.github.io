@@ -1,0 +1,11 @@
+_site
+.sass-cache
+.jekyll-cache
+.jekyll-metadata
+vendor
+_includes/galery.html
+_includes/contact.html
+_includes/about.html
+_layouts/page.html
+_layouts/post.html
+about.markdown

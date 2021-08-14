@@ -1,0 +1,13 @@
+<footer class="qt-footer parallax-container blue-grey-text text-lighten-5">
+<div class="parallax"><img src="assets/images/foot.jpg" alt="background"></div>
+<div class="container center-align">
+<h3 class="qt-footertitle"><img src="assets/images/logo-footer.png" alt="Sonik Music HTML template"></h3>
+<h5>Copyright 2021 <a href="{{ site.url | relative_url }}">{{ site.title }}</a> : {{ site.bio }}</h5>
+<p class="qt-social">
+    {% for sosmed in site.data.data.sosmed %}
+<a href="{{ sosmed.link }}"><span class="{{ sosmed.icons }}"></span></a>
+{% endfor %}
+</p>
+</div>
+<div class="qt-particles" id="particlesfooter" data-color="#ffffff" data-opacity="0.2" data-speed="1"></div>
+</footer>
