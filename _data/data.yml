@@ -23,14 +23,14 @@ preskit:
   title: Songs
   desc: You can download my free song here
   btn: Download
-  link: link
+  link: http://bit.ly/lexiiz-ncdl
 
 
 # Video
 yt:
 - 
   title: Video
-  desc: Checkout our video on youtube
+  desc: Checkout our video on YouTube
   btn: View
   link: https://www.youtube.com/channel/UC81BShm8sJBOIUvXnBKmRww
 
