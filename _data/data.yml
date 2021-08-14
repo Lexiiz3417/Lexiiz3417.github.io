@@ -4,9 +4,9 @@ sosmed:
   -
     link: https://youtube.com/lexiiz3417
     icons: qticon-youtube
-  -
-    link:
-    icons: qticon-twitter
+ # -
+ #   link:
+ #   icons: qticon-twitter
   - 
     link: https://fb.me/iiiivivii
     icons: qticon-facebook
