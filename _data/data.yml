@@ -33,7 +33,7 @@ yt:
   desc: Checkout our video on YouTube
   btn: View
   link: https://www.youtube.com/channel/UC81BShm8sJBOIUvXnBKmRww
-
+  img: video.jpg
 # Bio Text
 bio:
 - 
@@ -43,3 +43,14 @@ bio:
 -
   title: Thanks
   desc: I'm so grateful to my best friend who help me made this page, thank you so much <a href="https://github.com/zxce3"target="_blank">Zxce3</a>.
+
+# Request
+req:
+-
+  title: Request
+  desc:
+
+#Comunity
+com:
+- title: Comunity
+  desc: 
