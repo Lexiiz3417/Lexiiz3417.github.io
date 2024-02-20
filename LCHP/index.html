@@ -70,32 +70,33 @@
     </div>
 
     <script>
-        var files = ["artikel1", "artikel2", "artikel3"]; // Daftar nama file yang tersedia
-
         function showPreview() {
             var searchTerm = document.getElementById("searchInput").value.toLowerCase();
-            var matchedFiles = files.filter(function(file) {
-                return file.toLowerCase().includes(searchTerm);
-            });
-
+            var apiUrl = "https://api.github.com/repos/lexiiz3417/LCHP/contents/";
             var fileListContainer = document.getElementById("fileList");
             fileListContainer.innerHTML = "";
-            if (matchedFiles.length > 0) {
-                matchedFiles.forEach(function(file) {
-                    var link = document.createElement("a");
-                    link.href = "https://lexiiz3417.github.io/LCHP/" + file + ".html";
-                    link.textContent = file;
-                    fileListContainer.appendChild(link);
-                });
-                fileListContainer.style.display = "block";
-            } else {
-                fileListContainer.style.display = "none";
-            }
+
+            fetch(apiUrl)
+                .then(response => response.json())
+                .then(data => {
+                    var matchedFiles = data.filter(item => item.name.toLowerCase().includes(searchTerm));
+                    if (matchedFiles.length > 0) {
+                        matchedFiles.forEach(function(file) {
+                            var link = document.createElement("a");
+                            link.href = file.html_url;
+                            link.textContent = file.name.replace('.html', '');
+                            fileListContainer.appendChild(link);
+                        });
+                        fileListContainer.style.display = "block";
+                    } else {
+                        fileListContainer.style.display = "none";
+                    }
+                })
+                .catch(error => console.error('Error:', error));
         }
 
         function search() {
             var searchTerm = document.getElementById("searchInput").value.toLowerCase();
-            // Redirect to the corresponding HTML file based on the search term
             window.location.href = "https://lexiiz3417.github.io/LCHP/" + searchTerm + ".html";
         }
     </script>
