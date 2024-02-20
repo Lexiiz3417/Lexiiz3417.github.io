@@ -11,12 +11,9 @@
             font-family: Courier, monospace;
             padding: 20px;
         }
-        ol {
-            list-style-type: none;
-            padding: 0;
-        }
-        li {
-            margin-bottom: 10px;
+        footer {
+            text-align: right;
+            margin-top: 20px;
         }
         #print-btn {
             background-color: #444;
@@ -27,12 +24,21 @@
             cursor: pointer;
             margin-top: 20px;
         }
+        #search-bar {
+            margin-bottom: 20px;
+            padding: 10px;
+            border: none;
+            border-radius: 5px;
+            width: 100%;
+            box-sizing: border-box;
+        }
     </style>
 </head>
 <body>
     <h1>External Oblique Exercises</h1>
+    <input type="text" id="search-bar" placeholder="Search...">
     <hr>
-    <ol>
+    <ol id="exercise-list">
         <li>Russian twist</li>
         <li>Side plank</li>
         <li>Bicycle crunch</li>
@@ -60,8 +66,24 @@
         <li>Oblique V-up</li>
     </ol>
     <button id="print-btn" onclick="saveText()">Print to File</button>
+    
+    <footer>-Lexiiz3417</footer>
 
     <script>
+        document.getElementById('search-bar').addEventListener('input', function() {
+            var searchText = this.value.toLowerCase();
+            var exerciseList = document.getElementById('exercise-list');
+            var exercises = exerciseList.getElementsByTagName('li');
+            for (var i = 0; i < exercises.length; i++) {
+                var exercise = exercises[i].innerText.toLowerCase();
+                if (exercise.indexOf(searchText) === -1) {
+                    exercises[i].style.display = 'none';
+                } else {
+                    exercises[i].style.display = 'block';
+                }
+            }
+        });
+
         function saveText() {
             var textToSave = document.body.innerText;
             var hiddenElement = document.createElement('a');
