@@ -4,6 +4,30 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>External Oblique Exercises</title>
+    <style>
+        body {
+            background-color: #222;
+            color: #fff;
+            font-family: Courier, monospace;
+            padding: 20px;
+        }
+        ol {
+            list-style-type: none;
+            padding: 0;
+        }
+        li {
+            margin-bottom: 10px;
+        }
+        #print-btn {
+            background-color: #444;
+            color: #fff;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 5px;
+            cursor: pointer;
+            margin-top: 20px;
+        }
+    </style>
 </head>
 <body>
     <h1>External Oblique Exercises</h1>
@@ -35,6 +59,17 @@
         <li>Hanging Oblique Raise</li>
         <li>Oblique V-up</li>
     </ol>
-    <p>Ada koreksi? Silahkan chat saya - Lexiiz3417</p>
+    <button id="print-btn" onclick="saveText()">Print to File</button>
+
+    <script>
+        function saveText() {
+            var textToSave = document.body.innerText;
+            var hiddenElement = document.createElement('a');
+            hiddenElement.href = 'data:text/plain;charset=utf-8,' + encodeURIComponent(textToSave);
+            hiddenElement.target = '_blank';
+            hiddenElement.download = 'oblique_exercises.txt';
+            hiddenElement.click();
+        }
+    </script>
 </body>
 </html>
