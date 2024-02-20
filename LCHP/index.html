@@ -6,75 +6,84 @@
     <title>LCHP NOTES</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css"> <!-- Tambahkan Font Awesome CSS -->
     <style>
-        body {
-            background-color: #121212; /* Warna latar belakang gelap */
-            color: #FFFFFF; /* Warna teks */
-            font-family: 'Courier New', Courier, monospace; /* Font Courier New */
-            margin: 0;
-            padding: 0;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            min-height: 100vh;
-        }
-        .container {
-            width: 80%;
-            padding: 20px;
-            text-align: center;
-        }
-        h1 {
-            text-align: center;
-        }
-        p {
-            line-height: 1.6;
-        }
-        .search-container {
-            position: relative; /* Jadikan posisi relatif untuk posisi absolut ikon search */
-            display: flex; /* Gunakan flex untuk mengatur posisi ikon */
-            align-items: center; /* Posisikan ikon secara vertikal di tengah input */
-        }
-        input[type="text"] {
-            padding: 8px;
-            width: 40%; /* Perpendek ukuran bar pencarian */
-            margin-right: 10px;
-            border-radius: 30px; /* Bentuk kapsul memanjang */
-            border: 1px solid #FFFFFF; /* Tambahkan border */
-            outline: none; /* Hilangkan outline saat aktif */
-            background-color: #121212; /* Warna latar belakang gelap */
-            color: #FFFFFF; /* Warna teks */
-            font-family: 'Courier New', Courier, monospace; /* Font Courier New */
-            padding-left: 40px; /* Tambahkan ruang di kiri untuk ikon search */
-        }
-        input[type="text"]::placeholder {
-            color: #FFFFFF; /* Warna teks placeholder */
-        }
-        .fa-search {
-            position: absolute; /* Jadikan posisi absolut untuk ikon search */
-            left: 15px; /* Atur posisi ikon search di sisi kiri input */
-            color: #FFFFFF; /* Warna ikon search */
-        }
-        #searchResults {
-            margin-top: 20px;
-            text-align: left;
-            display: flex; /* Jadikan hasil pencarian terlihat berdampingan */
-            flex-wrap: wrap; /* Pastikan hasil pencarian bisa dibungkus */
-            justify-content: flex-start; /* Letakkan hasil pencarian di sisi kiri */
-        }
-        #searchResults a {
-            display: block;
-            color: #FFFFFF;
-            text-decoration: none;
-            margin: 5px; /* Ubah margin untuk memberikan jarak antar hasil */
-            padding: 8px;
-            border-radius: 5px;
-            border: 1px solid #FFFFFF; /* Tambahkan border */
-            line-height: 1.6; /* Sesuaikan line-height agar tidak ada ruang ekstra */
-            text-align: center; /* Rata tengah teks */
-            flex-grow: 1; /* Biarkan hasil pencarian tumbuh seiring kebutuhan */
-            max-width: 40%; /* Batasi lebar hasil pencarian */
-            overflow: hidden; /* Sembunyikan overflow jika teks terlalu panjang */
-            text-overflow: ellipsis; /* Tampilkan elipsis untuk teks yang terpotong */
-        }
+body {
+    background-color: #121212; /* Warna latar belakang gelap */
+    color: #FFFFFF; /* Warna teks */
+    font-family: 'Courier New', Courier, monospace; /* Font Courier New */
+    margin: 0;
+    padding: 0;
+    min-height: 100vh;
+}
+
+.container {
+    width: 80%;
+    padding: 20px;
+    text-align: center;
+    margin: 0 auto; /* Rata tengah container */
+}
+
+h1 {
+    text-align: center;
+}
+
+p {
+    line-height: 1.6;
+}
+
+.search-container {
+    position: relative; /* Jadikan posisi relatif untuk posisi absolut ikon search */
+    display: flex; /* Gunakan flex untuk mengatur posisi ikon */
+    align-items: center; /* Posisikan ikon secara vertikal di tengah input */
+    margin: 0 auto; /* Rata tengah container pencarian */
+}
+
+input[type="text"] {
+    padding: 8px;
+    width: 40%; /* Perpendek ukuran bar pencarian */
+    margin-right: 10px;
+    border-radius: 30px; /* Bentuk kapsul memanjang */
+    border: 1px solid #FFFFFF; /* Tambahkan border */
+    outline: none; /* Hilangkan outline saat aktif */
+    background-color: #121212; /* Warna latar belakang gelap */
+    color: #FFFFFF; /* Warna teks */
+    font-family: 'Courier New', Courier, monospace; /* Font Courier New */
+    padding-left: 40px; /* Tambahkan ruang di kiri untuk ikon search */
+}
+
+input[type="text"]::placeholder {
+    color: #FFFFFF; /* Warna teks placeholder */
+}
+
+.fa-search {
+    position: absolute; /* Jadikan posisi absolut untuk ikon search */
+    left: 15px; /* Atur posisi ikon search di sisi kiri input */
+    color: #FFFFFF; /* Warna ikon search */
+}
+
+#searchResults {
+    margin-top: 20px;
+    text-align: center; /* Rata tengah hasil pencarian */
+    display: flex; /* Jadikan hasil pencarian terlihat berdampingan */
+    flex-wrap: wrap; /* Pastikan hasil pencarian bisa dibungkus */
+    justify-content: center; /* Letakkan hasil pencarian di tengah */
+}
+
+#searchResults a {
+    display: block;
+    color: #FFFFFF;
+    text-decoration: none;
+    margin: 5px; /* Ubah margin untuk memberikan jarak antar hasil */
+    padding: 8px;
+    border-radius: 5px;
+    border: 1px solid #FFFFFF; /* Tambahkan border */
+    line-height: 1.6; /* Sesuaikan line-height agar tidak ada ruang ekstra */
+    text-align: center; /* Rata tengah teks */
+    flex-grow: 1; /* Biarkan hasil pencarian tumbuh seiring kebutuhan */
+    max-width: 40%; /* Batasi lebar hasil pencarian */
+    overflow: hidden; /* Sembunyikan overflow jika teks terlalu panjang */
+    text-overflow: ellipsis; /* Tampilkan elipsis untuk teks yang terpotong */
+}
+
     </style>
 </head>
 <body>
@@ -82,7 +91,7 @@
         <h1>LCHP NOTES</h1>
         <p>Sebuah tempat yang berisi catatan-catatan karya member dan admin LC: Healthy Program</p>
         <div class="search-container">
-            <input type="text" id="searchInput" placeholder="Temukan beberapa notes yang kami simpan..." oninput="search()">
+            <input type="text" id="searchInput" placeholder="Search notes..." oninput="search()">
             <i class="fas fa-search"></i> <!-- Tambahkan ikon search dari Font Awesome -->
         </div>
         <div id="searchResults"></div>
