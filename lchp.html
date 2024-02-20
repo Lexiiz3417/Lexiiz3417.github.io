@@ -46,6 +46,9 @@
         #content {
             margin-top: 50px; /* Memberi ruang untuk menampilkan hasil pencarian */
         }
+        h2 {
+            display: none; /* Sembunyikan semua h2 secara default */
+        }
     </style>
 </head>
 <body>
@@ -80,6 +83,14 @@
         <li>Walking lunge with rotation</li>
         <li>Hanging Oblique Raise</li>
         <li>Oblique V-up</li>
+        <li>Leg Raise Oblique Crunch</li>
+        <li>Decline Oblique Crunch</li>
+        <li>Oblique Hang</li>
+        <li>Dumbbell Side Bend</li>
+        <li>Side Plank Knee to Elbow</li>
+        <li>Plank Rotation</li>
+        <li>Dumbbell Side Bend</li>
+        <li>Barbell Side Bend</li>
     </ol>
     <h2>Internal Oblique Exercise</h2>
     <ol>
@@ -107,22 +118,28 @@
         <li>Twisting Mountain Climbers</li>
         <li>Oblique Heel Touches</li>
         <li>Crossbody Mountain Climbers</li>
+        <li>Oblique Bridge</li>
+        <li>Oblique Twist with Dumbbell</li>
+        <li>Oblique Plate Twist</li>
+        <li>Oblique Sled Push/Pull</li>
+        <li>Oblique Cable Crunch</li>
     </ol>
     
     <footer>-Lexiiz3417</footer>
 </div>
 
 <div id="search-container">
-    <input type="text" id="search-input" placeholder="Search...">
+    <input type="text" id="search-input" placeholder="Jangan nyari harapan disini :)...">
 </div>
 
 <script>
     document.getElementById("search-input").addEventListener("input", function() {
-        var input, filter, div, lists, li, i, txtValue;
+        var input, filter, div, lists, li, h2, i, txtValue;
         input = document.getElementById("search-input");
         filter = input.value.toUpperCase();
         div = document.getElementById("content");
         lists = div.getElementsByTagName("ol");
+        h2 = div.getElementsByTagName("h2");
         for (var j = 0; j < lists.length; j++) {
             li = lists[j].getElementsByTagName("li");
             for (i = 0; i < li.length; i++) {
@@ -134,8 +151,15 @@
                 }
             }
         }
+        for (i = 0; i < h2.length; i++) {
+            txtValue = h2[i].textContent || h2[i].innerText;
+            if (txtValue.toUpperCase().indexOf(filter) > -1) {
+                h2[i].style.display = "block";
+            } else {
+                h2[i].style.display = "none";
+            }
+        }
     });
 </script>
-
 </body>
 </html>
