@@ -103,34 +103,26 @@
 
 <script>
     function searchContent() {
-        var input, filter, div, headings, lists, items, i, j, k, txtValue;
+        var input, filter, div, lists, li, i, txtValue;
         input = document.getElementById("search-input");
         filter = input.value.toUpperCase();
         div = document.getElementById("content");
-        headings = div.getElementsByTagName("h2");
-        
-        for (k = 0; k < headings.length; k++) {
-            var anyItemsDisplayed = false; // Tandai apakah ada item yang ditampilkan
-            lists = headings[k].nextElementSibling.getElementsByTagName("ol");
-            for (j = 0; j < lists.length; j++) {
-                items = lists[j].getElementsByTagName("li");
-                for (i = 0; i < items.length; i++) {
-                    txtValue = items[i].textContent || items[i].innerText;
-                    if (txtValue.toUpperCase().indexOf(filter) > -1) {
-                        items[i].style.display = ""; // Tampilkan item yang sesuai
-                        anyItemsDisplayed = true; // Setel ke true karena ada item yang ditampilkan
-                    } else {
-                        items[i].style.display = "none"; // Sembunyikan item yang tidak sesuai
-                    }
+        lists = div.getElementsByTagName("ol");
+        for (var j = 0; j < lists.length; j++) {
+            li = lists[j].getElementsByTagName("li");
+            for (i = 0; i < li.length; i++) {
+                txtValue = li[i].textContent || li[i].innerText;
+                if (txtValue.toUpperCase().indexOf(filter) > -1) {
+                    li[i].style.display = "";
+                } else {
+                    li[i].style.display = "none";
                 }
             }
-            if (anyItemsDisplayed) {
-                headings[k].style.display = "";
-            } else {
-                headings[k].style.display = "none"; // 
-            }
         }
-    } document.getElementById("search-input").addEventListener("input", searchContent);
+    }
+    
+    // Panggil fungsi pencarian setiap kali input berubah
+    document.getElementById("search-input").addEventListener("input", searchContent);
 </script>
 
 </body>
