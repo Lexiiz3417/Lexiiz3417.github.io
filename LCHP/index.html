@@ -78,7 +78,7 @@
             fetch(apiUrl)
                 .then(response => response.json())
                 .then(data => {
-                    var searchResults = data.filter(item => item.name.toLowerCase().includes(searchTerm));
+            var searchResults = data.filter(item => item.name.toLowerCase().includes(searchTerm) && !item.name.includes("index.html"));
                     displaySearchResults(searchResults);
                 })
                 .catch(error => console.error('Error:', error));
