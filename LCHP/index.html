@@ -14,25 +14,22 @@ body {
     padding: 0;
     min-height: 100vh;
 }
-
 .container {
     width: 80%;
     padding: 20px;
     text-align: center;
     margin: 0 auto; /* Rata tengah container */
-}
-
-h1 {
-    text-align: center;
-}
-
-p {
-    line-height: 1.6;
+    display: flex;
+    justify-content: center; /* Tengahkan konten secara horizontal */
+    align-items: center; /* Tengahkan konten secara vertikal */
+    min-height: 100vh; /* Buat tinggi minimal setara dengan tinggi viewport */
 }
 
 .search-container {
     position: relative;
-    display: inline-block; /* Mengubah display menjadi inline-block */
+    display: flex;
+    align-items: center; /* Tengahkan ikon dan input secara vertikal */
+    margin: 0 auto; /* Rata tengah container pencarian */
 }
 
 input[type="text"] {
@@ -55,9 +52,8 @@ input[type="text"]::placeholder {
 .fa-search {
     position: absolute; 
     left: 10px; /* Geser ikon ke kiri */
-    top: 50%; 
-    transform: translateY(-50%);
     color: #FFFFFF;
+    z-index: 1; /* Letakkan ikon di atas input */
 }
 
 #searchResults {
@@ -90,10 +86,10 @@ input[type="text"]::placeholder {
     <div class="container">
         <h1>LCHP NOTES</h1>
         <p>Sebuah tempat yang berisi catatan-catatan karya member dan admin LC: Healthy Program</p>
-        <div class="search-container">
-<i class="fas fa-search"></i>
-            <input type="text" id="searchInput" placeholder="Search notes..." oninput="search()">
-        </div>
+ <div class="search-container">
+    <i class="fas fa-search"></i>
+    <input type="text" id="searchInput" placeholder="Search notes..." oninput="search()">
+</div>
         <div id="searchResults"></div>
     </div>
 
