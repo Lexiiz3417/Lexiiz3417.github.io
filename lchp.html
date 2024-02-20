@@ -49,6 +49,9 @@
             border-radius: 5px;
             cursor: pointer;
         }
+        #content {
+            margin-top: 50px; /* Memberi ruang untuk menampilkan hasil pencarian */
+        }
     </style>
 </head>
 <body>
@@ -100,23 +103,34 @@
 
 <script>
     function searchContent() {
-        var input, filter, div, lists, li, i, txtValue;
+        var input, filter, div, lists, items, i, j, txtValue;
         input = document.getElementById("search-input");
         filter = input.value.toUpperCase();
         div = document.getElementById("content");
         lists = div.getElementsByTagName("ol");
-        for (var j = 0; j < lists.length; j++) {
-            li = lists[j].getElementsByTagName("li");
-            for (i = 0; i < li.length; i++) {
-                txtValue = li[i].textContent || li[i].innerText;
+        for (j = 0; j < lists.length; j++) {
+            items = lists[j].getElementsByTagName("li");
+            var anyItemsDisplayed = false; // Tandai apakah ada item yang ditampilkan
+            for (i = 0; i < items.length; i++) {
+                txtValue = items[i].textContent || items[i].innerText;
                 if (txtValue.toUpperCase().indexOf(filter) > -1) {
-                    li[i].style.display = "";
+                    items[i].style.display = ""; // Tampilkan item yang sesuai
+                    anyItemsDisplayed = true; // Setel ke true karena ada item yang ditampilkan
                 } else {
-                    li[i].style.display = "none";
+                    items[i].style.display = "none"; // Sembunyikan item yang tidak sesuai
                 }
+            }
+            // Sembunyikan h2 jika tidak ada item yang ditampilkan dalam daftar
+            if (!anyItemsDisplayed) {
+                lists[j].previousElementSibling.style.display = "none";
+            } else {
+                lists[j].previousElementSibling.style.display = ""; // Tampilkan kembali h2 jika ada item yang ditampilkan
             }
         }
     }
+    
+    // Panggil fungsi pencarian setiap kali input berubah
+    document.getElementById("search-input").addEventListener("input", searchContent);
 </script>
 
 </body>
