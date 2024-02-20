@@ -103,28 +103,32 @@
 
 <script>
     function searchContent() {
-        var input, filter, div, lists, items, i, j, txtValue;
+        var input, filter, div, headings, lists, items, i, j, k, txtValue;
         input = document.getElementById("search-input");
         filter = input.value.toUpperCase();
         div = document.getElementById("content");
-        lists = div.getElementsByTagName("ol");
-        for (j = 0; j < lists.length; j++) {
-            items = lists[j].getElementsByTagName("li");
+        headings = div.getElementsByTagName("h2");
+        
+        for (k = 0; k < headings.length; k++) {
             var anyItemsDisplayed = false; // Tandai apakah ada item yang ditampilkan
-            for (i = 0; i < items.length; i++) {
-                txtValue = items[i].textContent || items[i].innerText;
-                if (txtValue.toUpperCase().indexOf(filter) > -1) {
-                    items[i].style.display = ""; // Tampilkan item yang sesuai
-                    anyItemsDisplayed = true; // Setel ke true karena ada item yang ditampilkan
-                } else {
-                    items[i].style.display = "none"; // Sembunyikan item yang tidak sesuai
+            lists = headings[k].nextElementSibling.getElementsByTagName("ol");
+            for (j = 0; j < lists.length; j++) {
+                items = lists[j].getElementsByTagName("li");
+                for (i = 0; i < items.length; i++) {
+                    txtValue = items[i].textContent || items[i].innerText;
+                    if (txtValue.toUpperCase().indexOf(filter) > -1) {
+                        items[i].style.display = ""; // Tampilkan item yang sesuai
+                        anyItemsDisplayed = true; // Setel ke true karena ada item yang ditampilkan
+                    } else {
+                        items[i].style.display = "none"; // Sembunyikan item yang tidak sesuai
+                    }
                 }
             }
-            // Sembunyikan h2 jika tidak ada item yang ditampilkan dalam daftar
-            if (!anyItemsDisplayed) {
-                lists[j].previousElementSibling.style.display = "none";
+            // Tampilkan kembali judul h2 jika ada item yang ditampilkan dalam daftar
+            if (anyItemsDisplayed) {
+                headings[k].style.display = "";
             } else {
-                lists[j].previousElementSibling.style.display = ""; // Tampilkan kembali h2 jika ada item yang ditampilkan
+                headings[k].style.display = "none"; // Sembunyikan judul h2 jika tidak ada item yang ditampilkan
             }
         }
     }
