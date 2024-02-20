@@ -34,17 +34,6 @@
             border-radius: 5px;
             border: none;
         }
-        button {
-            padding: 8px 16px;
-            background-color: #4CAF50;
-            color: white;
-            border: none;
-            border-radius: 5px;
-            cursor: pointer;
-        }
-        button:hover {
-            background-color: #45a049;
-        }
         #searchResults {
             margin-top: 20px;
             text-align: left;
@@ -54,6 +43,9 @@
             color: #FFFFFF;
             text-decoration: none;
             margin-bottom: 5px;
+            padding: 8px;
+            border-radius: 5px;
+            border: 1px solid #FFFFFF; /* Tambahkan border */
         }
     </style>
 </head>
@@ -62,8 +54,7 @@
         <h1>Selamat datang di LCHP Blog</h1>
         <p>Temukan artikel yang Anda cari</p>
         <div>
-            <input type="text" id="searchInput" placeholder="Cari artikel...">
-            <button onclick="search()">Cari</button>
+            <input type="text" id="searchInput" placeholder="Cari artikel..." oninput="search()">
         </div>
         <div id="searchResults"></div>
     </div>
@@ -82,24 +73,22 @@
                 .catch(error => console.error('Error:', error));
         }
 
-function displaySearchResults(results) {
-    var searchResultsContainer = document.getElementById("searchResults");
-    searchResultsContainer.innerHTML = "";
+        function displaySearchResults(results) {
+            var searchResultsContainer = document.getElementById("searchResults");
+            searchResultsContainer.innerHTML = "";
 
-    if (results.length > 0) {
-        results.forEach(function(result) {
-            var link = document.createElement("a");
-            // Mengganti bagian awal URL dengan URL relatif ke situs GitHub Pages Anda
-            var relativeUrl = result.path.replace("LCHP/", "");
-            link.href = "https://" + window.location.hostname + "/LCHP/" + relativeUrl;
-            link.textContent = result.name.replace('.html', '');
-            searchResultsContainer.appendChild(link);
-        });
-    } else {
-        searchResultsContainer.textContent = "Tidak ada hasil yang ditemukan";
-    }
-}
-
+            if (results.length > 0) {
+                results.forEach(function(result) {
+                    var link = document.createElement("a");
+                    var relativeUrl = result.path.replace("LCHP/", "");
+                    link.href = "https://" + window.location.hostname + "/LCHP/" + relativeUrl;
+                    link.textContent = result.name.replace('.html', '');
+                    searchResultsContainer.appendChild(link);
+                });
+            } else {
+                searchResultsContainer.textContent = "Tidak ada hasil yang ditemukan";
+            }
+        }
     </script>
 </body>
 </html>
