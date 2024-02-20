@@ -76,14 +76,14 @@
         document.getElementById('search-bar').addEventListener('input', function() {
             var searchText = this.value.toLowerCase();
             var exercises = document.querySelectorAll('ol li');
-            exercises.forEach(function(exercise) {
-                var exerciseText = exercise.innerText.toLowerCase();
-                if (exerciseText.includes(searchText)) {
-                    exercise.style.display = 'block';
+            for (var i = 0; i < exercises.length; i++) {
+                var exercise = exercises[i].innerText.toLowerCase();
+                if (exercise.indexOf(searchText) === -1) {
+                    exercises[i].style.display = 'none';
                 } else {
-                    exercise.style.display = 'none';
+                    exercises[i].style.display = 'block';
                 }
-            });
+            }
         });
 
         function saveText() {
