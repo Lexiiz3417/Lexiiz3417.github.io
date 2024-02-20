@@ -32,9 +32,6 @@
             width: 100%;
             box-sizing: border-box;
         }
-        #welcome {
-            text-align: center;
-        }
     </style>
 </head>
 <body>
@@ -42,7 +39,7 @@
     <p id="welcome">Selamat datang di pustaka LC: Healthy Program</p>
     <input type="text" id="search-bar" placeholder="Carinya disini bg...">
     <h1>External Oblique Exercises</h1>
-    <ol id="exercise-list">
+    <ol>
         <li>Russian twist</li>
         <li>Side plank</li>
         <li>Bicycle crunch</li>
@@ -74,18 +71,19 @@
     <footer>-Lexiiz3417</footer>
 
     <script>
+        var originalList = document.querySelector('ol').innerHTML;
+
         document.getElementById('search-bar').addEventListener('input', function() {
             var searchText = this.value.toLowerCase();
-            var allText = document.body.innerText.toLowerCase();
-            var matches = allText.match(new RegExp(searchText, 'g'));
-            if (matches) {
-                document.body.innerHTML = document.body.innerHTML.replace(new RegExp('<span class="highlight">', 'g'), '');
-                matches.forEach(function(match) {
-                    var regex = new RegExp(match, 'g');
-                    allText = allText.replace(regex, '<span class="highlight">' + match + '</span>');
-                });
-                document.body.innerHTML = allText;
-            }
+            var exercises = document.querySelectorAll('ol li');
+            exercises.forEach(function(exercise) {
+                var exerciseText = exercise.innerText.toLowerCase();
+                if (exerciseText.includes(searchText)) {
+                    exercise.style.display = 'block';
+                } else {
+                    exercise.style.display = 'none';
+                }
+            });
         });
 
         function saveText() {
