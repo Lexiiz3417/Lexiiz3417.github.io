@@ -32,11 +32,13 @@
             width: 100%;
             box-sizing: border-box;
         }
+        h1 {
+            text-align: center; /* Menjadikan judul rata tengah */
+        }
     </style>
 </head>
 <body>
     <h1>LCHP Notes</h1>
-    <p id="welcome">Selamat datang di pustaka LC: Healthy Program</p>
     <input type="text" id="search-bar" placeholder="Carinya disini bg...">
     <h1>External Oblique Exercises</h1>
     <ol>
@@ -71,18 +73,17 @@
     <footer>-Lexiiz3417</footer>
 
     <script>
-        var originalList = document.querySelector('ol').innerHTML;
-
         document.getElementById('search-bar').addEventListener('input', function() {
             var searchText = this.value.toLowerCase();
-            var exercises = document.querySelectorAll('ol li');
-            for (var i = 0; i < exercises.length; i++) {
-                var exercise = exercises[i].innerText.toLowerCase();
-                if (exercise.indexOf(searchText) === -1) {
-                    exercises[i].style.display = 'none';
-                } else {
-                    exercises[i].style.display = 'block';
-                }
+            var allText = document.body.innerText.toLowerCase();
+            var matches = allText.match(new RegExp(searchText, 'g'));
+            if (matches) {
+                document.body.innerHTML = document.body.innerHTML.replace(new RegExp('<span class="highlight">', 'g'), '');
+                matches.forEach(function(match) {
+                    var regex = new RegExp(match, 'g');
+                    allText = allText.replace(regex, '<span class="highlight">' + match + '</span>');
+                });
+                document.body.innerHTML = allText;
             }
         });
 
