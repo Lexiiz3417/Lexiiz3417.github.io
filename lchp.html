@@ -124,17 +124,13 @@
                     }
                 }
             }
-            // Tampilkan kembali judul h2 jika ada item yang ditampilkan dalam daftar
             if (anyItemsDisplayed) {
                 headings[k].style.display = "";
             } else {
-                headings[k].style.display = "none"; // Sembunyikan judul h2 jika tidak ada item yang ditampilkan
+                headings[k].style.display = "none"; // 
             }
         }
-    }
-    
-    // Panggil fungsi pencarian setiap kali input berubah
-    document.getElementById("search-input").addEventListener("input", searchContent);
+    } document.getElementById("search-input").addEventListener("input", searchContent);
 </script>
 
 </body>
