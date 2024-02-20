@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>LCHP NOTES</title>
+    <style>
+        body {
+            background-color: #121212; /* Warna latar belakang gelap */
+            color: #FFFFFF; /* Warna teks */
+            font-family: 'Courier New', Courier, monospace; /* Font Courier New */
+            margin: 0;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+        }
+        .container {
+            width: 80%;
+            padding: 20px;
+            text-align: center;
+        }
+        h1 {
+            text-align: center;
+        }
+        p {
+            line-height: 1.6;
+        }
+        input[type="text"] {
+            padding: 8px;
+            width: 60%;
+            margin-right: 10px;
+            border-radius: 5px;
+            border: none;
+        }
+        button {
+            padding: 8px 16px;
+            background-color: #4CAF50;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+        button:hover {
+            background-color: #45a049;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>LCHP NOTES</h1>
+        <p>Selamat datang</p>
+        <div>
+            <input type="text" id="searchInput" placeholder="Cari...">
+            <button onclick="search()">Cari</button>
+        </div>
+    </div>
+
+    <script>
+        function search() {
+            var searchTerm = document.getElementById("searchInput").value;
+            // Redirect to the corresponding HTML file based on the search term
+            window.location.href = "LCHP/" + searchTerm + ".html";
+        }
+    </script>
+</body>
+</html>
