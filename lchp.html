@@ -46,9 +46,7 @@
         #content {
             margin-top: 50px; /* Memberi ruang untuk menampilkan hasil pencarian */
         }
-        h2 {
-            display: none; /* Sembunyikan semua h2 secara default */
-        }
+      
     </style>
 </head>
 <body>
@@ -138,7 +136,9 @@
             txtValue = h2[i].textContent || h2[i].innerText;
             if (txtValue.toUpperCase().indexOf(filter) > -1) {
                 h2[i].style.display = "block";
-            } 
+            } else {
+                h2[i].style.display = "none";
+            }
         }
     });
 </script>
