@@ -34,20 +34,14 @@
             padding: 10px 20px;
             box-sizing: border-box;
             z-index: 999; /* Untuk memastikan search bar berada di atas konten */
+            display: flex; /* Membuat input dan tombol berada dalam satu baris */
         }
         #search-input {
+            flex: 1; /* Memastikan input akan mengisi sebanyak mungkin ruang yang tersedia */
             padding: 8px;
             border: 1px solid #ccc;
             border-radius: 5px;
             margin-right: 5px;
-        }
-        #search-btn {
-            padding: 8px 20px;
-            border: none;
-            background-color: #444; /* Warna tombol search */
-            color: #fff;
-            border-radius: 5px;
-            cursor: pointer;
         }
         #content {
             margin-top: 50px; /* Memberi ruang untuk menampilkan hasil pencarian */
@@ -89,8 +83,30 @@
     </ol>
     <h2>Internal Oblique Exercise</h2>
     <ol>
-        <li>Russian twist</li>
-        <!-- Remaining list items -->
+        <li>Elbow to Knee Crunches</li>
+        <li>Dead Bug</li>
+        <li>Side Plank Hip Lift</li>
+        <li>Plank with Oblique Crunch</li>
+        <li>Scissor Kicks</li>
+        <li>Reverse Crunch</li>
+        <li>Thread the Needle</li>
+        <li>Oblique V-Up</li>
+        <li>Russian Twists</li>
+        <li>Bicycle Crunches</li>
+        <li>Side Plank Dips</li>
+        <li>Leg Raises</li>
+        <li>Side Plank with Leg Lift</li>
+        <li>Hip Dip</li>
+        <li>Plank with Reach Through</li>
+        <li>Side Jackknives</li>
+        <li>Side Crunches</li>
+        <li>Plank Hip Twists</li>
+        <li>Side Plank with Twist</li>
+        <li>Seated Russian Twists</li>
+        <li>Toe Touch Crunches</li>
+        <li>Twisting Mountain Climbers</li>
+        <li>Oblique Heel Touches</li>
+        <li>Crossbody Mountain Climbers</li>
     </ol>
     
     <footer>-Lexiiz3417</footer>
@@ -98,11 +114,10 @@
 
 <div id="search-container">
     <input type="text" id="search-input" placeholder="Search...">
-    <button id="search-btn" onclick="searchContent()">Search</button>
 </div>
 
 <script>
-    function searchContent() {
+    document.getElementById("search-input").addEventListener("input", function() {
         var input, filter, div, lists, li, i, txtValue;
         input = document.getElementById("search-input");
         filter = input.value.toUpperCase();
@@ -119,10 +134,7 @@
                 }
             }
         }
-    }
-    
-    // Panggil fungsi pencarian setiap kali input berubah
-    document.getElementById("search-input").addEventListener("input", searchContent);
+    });
 </script>
 
 </body>
