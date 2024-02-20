@@ -19,17 +19,13 @@ body {
     padding: 20px;
     text-align: center;
     margin: 0 auto; /* Rata tengah container */
-    display: flex;
-    justify-content: center; /* Tengahkan konten secara horizontal */
-    align-items: center; /* Tengahkan konten secara vertikal */
     min-height: 100vh; /* Buat tinggi minimal setara dengan tinggi viewport */
 }
 
 .search-container {
     position: relative;
-    display: flex;
-    align-items: center; /* Tengahkan ikon dan input secara vertikal */
-    margin: 0 auto; /* Rata tengah container pencarian */
+    display: inline-block; /* Mengubah display menjadi inline-block */
+    text-align: left; /* Teks dalam search container diatur ke kiri */
 }
 
 input[type="text"] {
@@ -59,8 +55,6 @@ input[type="text"]::placeholder {
 #searchResults {
     margin-top: 20px;
     text-align: center;
-    display: flex; /* Jadikan hasil pencarian terlihat berdampingan */
-    flex-wrap: wrap; /* Pastikan hasil pencarian bisa dibungkus */
     justify-content: center; /* Letakkan hasil pencarian di tengah */
 }
 
