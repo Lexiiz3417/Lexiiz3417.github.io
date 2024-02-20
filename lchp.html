@@ -43,6 +43,14 @@
             border-radius: 5px;
             margin-right: 5px;
         }
+        #search-btn {
+            padding: 8px 20px;
+            border: none;
+            background-color: #444; /* Warna tombol search */
+            color: #fff;
+            border-radius: 5px;
+            cursor: pointer;
+        }
         #content {
             margin-top: 50px; /* Memberi ruang untuk menampilkan hasil pencarian */
         }
@@ -116,50 +124,23 @@
 
 <div id="search-container">
     <input type="text" id="search-input" placeholder="Search...">
+    <button id="search-btn">Search on this page</button>
 </div>
 
 <script>
-    document.getElementById("search-input").addEventListener("input", function() {
-        var input, filter, div, lists, li, h2, i, txtValue;
-        input = document.getElementById("search-input");
-        filter = input.value.toUpperCase();
-        div = document.getElementById("content");
-        lists = div.getElementsByTagName("ol");
-        h2 = div.getElementsByTagName("h2");
-        for (var j = 0; j < lists.length; j++) {
-            li = lists[j].getElementsByTagName("li");
-            for (i = 0; i < li.length; i++) {
-                txtValue = li[i].textContent || li[i].innerText;
-                if (txtValue.toUpperCase().indexOf(filter) > -1) {
-                    li[i].style.display = "";
-                    highlightSearchResult(li[i], filter);
-                } else {
-                    li[i].style.display = "none";
-                }
-            }
-        }
-        for (i = 0; i < h2.length; i++) {
-            txtValue = h2[i].textContent || h2[i].innerText;
-            if (txtValue.toUpperCase().indexOf(filter) > -1) {
-                h2[i].style.display = "block";
-                highlightSearchResult(h2[i], filter);
-            } else {
-                h2[i].style.display = "none";
-            }
+    document.getElementById("search-btn").addEventListener("click", function() {
+        var searchTerm = document.getElementById("search-input").value.trim();
+        if (searchTerm === "") return; // Jika input pencarian kosong, langsung keluar dari fungsi
+        var content = document.getElementById("content").innerHTML;
+        var regex = new RegExp(searchTerm, "gi");
+        var highlightedContent = content.replace(regex, "<span class='highlight'>$&</span>");
+        document.getElementById("content").innerHTML = highlightedContent;
+        // Gulir ke hasil pencarian pertama
+        var highlightedElement = document.querySelector(".highlight");
+        if (highlightedElement) {
+            highlightedElement.scrollIntoView({ behavior: 'smooth', block: 'center' });
         }
     });
-
-    function highlightSearchResult(element, filter) {
-        var innerHTML = element.innerHTML;
-        var index = innerHTML.toUpperCase().indexOf(filter);
-        if (index >= 0) {
-            var highlightedText = "<span class='highlight'>" + innerHTML.substr(index, filter.length) + "</span>";
-            innerHTML = innerHTML.substr(0, index) + highlightedText + innerHTML.substr(index + filter.length);
-            element.innerHTML = innerHTML;
-            // Gulir ke hasil pencarian
-            element.scrollIntoView({ behavior: 'smooth', block: 'center' });
-        }
-    }
 </script>
 
 </body>
