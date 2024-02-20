@@ -45,15 +45,20 @@
         }
         #content {
             margin-top: 50px; /* Memberi ruang untuk menampilkan hasil pencarian */
-        }   
+        }
+        h2 {
+            display: none; /* Sembunyikan semua h2 secara default */
+        }
+        .highlight {
+            background-color: yellow; /* Warna sorotan */
+        }
     </style>
 </head>
 <body>
 <center>
-    <h1>LCHP Notes (Beta)</h1>
-<p>Sebuah catatan kecil dari "LC: Healthy Program" yang <b>mungkin</b> berguna bagi kalian :)</p>
+    <h1>LCHP Notes</h1>
 </center>
-<div id="content">
+<div id="content">    
     <h2>External Oblique Exercise</h2>
     <ol>
         <li>Russian twist</li>
@@ -110,7 +115,7 @@
 </div>
 
 <div id="search-container">
-    <input type="text" id="search-input" placeholder="ini namanya kolom pencarian bang">
+    <input type="text" id="search-input" placeholder="Search...">
 </div>
 
 <script>
@@ -127,6 +132,7 @@
                 txtValue = li[i].textContent || li[i].innerText;
                 if (txtValue.toUpperCase().indexOf(filter) > -1) {
                     li[i].style.display = "";
+                    highlightSearchResult(li[i], filter);
                 } else {
                     li[i].style.display = "none";
                 }
@@ -136,11 +142,25 @@
             txtValue = h2[i].textContent || h2[i].innerText;
             if (txtValue.toUpperCase().indexOf(filter) > -1) {
                 h2[i].style.display = "block";
+                highlightSearchResult(h2[i], filter);
             } else {
                 h2[i].style.display = "none";
             }
         }
     });
+
+    function highlightSearchResult(element, filter) {
+        var innerHTML = element.innerHTML;
+        var index = innerHTML.toUpperCase().indexOf(filter);
+        if (index >= 0) {
+            var highlightedText = "<span class='highlight'>" + innerHTML.substr(index, filter.length) + "</span>";
+            innerHTML = innerHTML.substr(0, index) + highlightedText + innerHTML.substr(index + filter.length);
+            element.innerHTML = innerHTML;
+            // Gulir ke hasil pencarian
+            element.scrollIntoView({ behavior: 'smooth', block: 'center' });
+        }
+    }
 </script>
+
 </body>
 </html>
