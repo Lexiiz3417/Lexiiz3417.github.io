@@ -1,146 +1,143 @@
 <!DOCTYPE html>
-<html lang="en">
+<html>
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>LCHP Notes</title>
-    <style>
-        body {
-            background-color: #222;
-            color: #fff;
-            font-family: Courier, monospace;
-            padding: 20px;
-            margin-top: 50px; /* Untuk memberi ruang di atas konten agar search bar tidak menutupinya */
-        }
-        footer {
-            text-align: right;
-            margin-top: 20px;
-        }
-        #print-btn {
-            background-color: #444;
-            color: #fff;
-            border: none;
-            padding: 10px 20px;
-            border-radius: 5px;
-            cursor: pointer;
-            margin-top: 20px;
-        }
-        #search-container {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            background-color: #333; /* Warna latar belakang search bar */
-            padding: 10px 20px;
-            box-sizing: border-box;
-            z-index: 999; /* Untuk memastikan search bar berada di atas konten */
-            display: flex; /* Membuat input dan tombol berada dalam satu baris */
-        }
-        #search-input {
-            flex: 1; /* Memastikan input akan mengisi sebanyak mungkin ruang yang tersedia */
-            padding: 8px;
-            border: 1px solid #ccc;
-            border-radius: 5px;
-            margin-right: 5px;
-        }
-        #search-btn {
-            padding: 8px 20px;
-            border: none;
-            background-color: #444; /* Warna tombol search */
-            color: #fff;
-            border-radius: 5px;
-            cursor: pointer;
-        }
-        #content {
-            margin-top: 50px; /* Memberi ruang untuk menampilkan hasil pencarian */
-        }
-        h2 {
-            display: none; /* Sembunyikan semua h2 secara default */
-        }
-        .highlight {
-            background-color: yellow; /* Warna sorotan */
-        }
-    </style>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<style>
+body {
+  font-family: Courier, monospace;
+  background-color: black;
+  color: white;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+/* Create a column layout with Flexbox */
+.row {
+  display: flex;
+}
+
+/* Left column (menu) */
+.left {
+  flex: 35%;
+  padding: 15px 0;
+  border-right: 1px solid white;
+}
+
+.left h2 {
+  padding-left: 8px;
+}
+
+/* Right column (page content) */
+.right {
+  flex: 65%;
+  padding: 15px;
+}
+
+/* Style the search box */
+#mySearch {
+  width: 100%;
+  font-size: 18px;
+  padding: 11px;
+  border: 1px solid white;
+  background-color: black;
+  color: white;
+}
+
+/* Style the navigation menu inside the left column */
+#myMenu {
+  list-style-type: none;
+  padding: 0;
+  margin: 0;
+}
+
+#myMenu li a {
+  padding: 12px;
+  text-decoration: none;
+  color: white;
+  display: block;
+}
+
+#myMenu li a:hover {
+  background-color: #333;
+}
+</style>
 </head>
 <body>
-<center>
-    <h1>LCHP Notes</h1>
-</center>
-<div id="content">    
-    <h2>External Oblique Exercise</h2>
-    <ol>
-        <li>Russian twist</li>
-        <li>Side plank</li>
-        <li>Bicycle crunch</li>
-        <li>Mountain climbers</li>
-        <li>Woodchoppers</li>
-        <li>Hip dips</li>
-        <li>Side crunch</li>
-        <li>Heel taps</li>
-        <li>Side bend</li>
-        <li>Bird dog</li>
-        <li>Oblique crunch</li>
-        <li>Windshield wipers</li>
-        <li>Hanging knee raise</li>
-        <li>Medicine ball rotational Toss</li>
-        <li>Cable Woodchop</li>
-        <li>Landmine rotations</li>
-        <li>FOREARM plank reach out</li>
-        <li>Pallof press</li>
-        <li>Spiderman crunch</li>
-        <li>Spiderman push-up</li>
-        <li>Standing weighted twist</li>
-        <li>Supine obliques</li>
-        <li>Walking lunge with rotation</li>
-        <li>Hanging Oblique Raise</li>
-        <li>Oblique V-up</li>
-        <li>Leg Raise Oblique Crunch</li>
-        <li>Decline Oblique Crunch</li>
-        <li>Oblique Hang</li>
-        <li>Dumbbell Side Bend</li>
-        <li>Side Plank Knee to Elbow</li>
-        <li>Plank Rotation</li>
-        <li>Dumbbell Side Bend</li>
-        <li>Barbell Side Bend</li>
-    </ol>
-    <h2>Internal Oblique Exercise</h2>
-    <ol>
-        <li>test</li>
-        <li>test</li>
-        <li>test</li>
-        <li>test</li>
-       <li>test</li>
-        <li>test</li>
-        <li>test</li>
-        <li>test</li>
-       <li>test</li>
-        <li>test</li>
-        <li>test</li>
-        <li>test</li>
-    </ol>
-    
-    <footer>-Lexiiz3417</footer>
-</div>
 
-<div id="search-container">
-    <input type="text" id="search-input" placeholder="Search...">
-    <button id="search-btn">Search on this page</button>
+<h2>Search Menu</h2>
+<p>Start to type for a specific category inside the search bar to "filter" the search options.</p>
+
+<div class="row">
+  <div class="left">
+    <h2>Menu</h2>
+    <input type="text" id="mySearch" onkeyup="myFunction()" placeholder="Search.." title="Type in a category">
+    <ul id="myMenu">
+      <li><a href="#">HTML</a></li>
+      <li><a href="#">CSS</a></li>
+      <li><a href="#">JavaScript</a></li>
+      <li><a href="#">PHP</a></li>
+      <li><a href="#">Python</a></li>
+      <li><a href="#">jQuery</a></li>
+      <li><a href="#">SQL</a></li>
+      <li><a href="#">Bootstrap</a></li>
+      <li><a href="#">Node.js</a></li>
+    </ul>
+  </div>
+  
+  <div class="right">
+    <h2>Page Content</h2>
+    <p>Start to type for a specific category inside the search bar to "filter" the search options.</p>
+    <p>Some text..Some text..Some text..Some text..Some text..Some text..Some text..Some text..</p>
+    <p>Some other text..Some text..Some text..Some text..Some text..Some text..Some text..Some text..</p>
+    <p>Some text..</p>
+  </div>
 </div>
 
 <script>
-    document.getElementById("search-btn").addEventListener("click", function() {
-        var searchTerm = document.getElementById("search-input").value.trim();
-        if (searchTerm === "") return; // Jika input pencarian kosong, langsung keluar dari fungsi
-        var content = document.getElementById("content").innerHTML;
-        var regex = new RegExp(searchTerm, "gi");
-        var highlightedContent = content.replace(regex, "<span class='highlight'>$&</span>");
-        document.getElementById("content").innerHTML = highlightedContent;
-        // Gulir ke hasil pencarian pertama
-        var highlightedElement = document.querySelector(".highlight");
-        if (highlightedElement) {
-            highlightedElement.scrollIntoView({ behavior: 'smooth', block: 'center' });
-        }
-    });
+function myFunction() {
+  var input, filter, ul, li, a, i;
+  input = document.getElementById("mySearch");
+  filter = input.value.toUpperCase();
+  ul = document.getElementById("myMenu");
+  li = ul.getElementsByTagName("li");
+  for (i = 0; i < li.length; i++) {
+    a = li[i].getElementsByTagName("a")[0];
+    if (a.innerHTML.toUpperCase().indexOf(filter) > -1) {
+      li[i].style.display = "";
+    } else {
+      li[i].style.display = "none";
+    }
+  }
+}
+
+// Sort the menu items alphabetically
+function sortMenu() {
+  var ul, li, switching, i, x, y, shouldSwitch;
+  ul = document.getElementById("myMenu");
+  switching = true;
+  while (switching) {
+    switching = false;
+    li = ul.getElementsByTagName("li");
+    for (i = 0; i < (li.length - 1); i++) {
+      shouldSwitch = false;
+      x = li[i].getElementsByTagName("a")[0];
+      y = li[i + 1].getElementsByTagName("a")[0];
+      if (x.innerHTML.toLowerCase() > y.innerHTML.toLowerCase()) {
+        shouldSwitch= true;
+        break;
+      }
+    }
+    if (shouldSwitch) {
+      li[i].parentNode.insertBefore(li[i + 1], li[i]);
+      switching = true;
+    }
+  }
+}
+
+// Call the sortMenu function when the page loads
+window.onload = sortMenu;
 </script>
 
 </body>
