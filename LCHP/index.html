@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>LCHP NOTES</title>
+    <title>LCHP Blog</title>
     <style>
         body {
             background-color: #121212; /* Warna latar belakang gelap */
@@ -45,12 +45,11 @@
         button:hover {
             background-color: #45a049;
         }
-        #fileList {
-            margin-top: 10px;
+        #searchResults {
+            margin-top: 20px;
             text-align: left;
-            display: none;
         }
-        #fileList a {
+        #searchResults a {
             display: block;
             color: #FFFFFF;
             text-decoration: none;
@@ -60,44 +59,43 @@
 </head>
 <body>
     <div class="container">
-        <h1>LCHP NOTES</h1>
-        <p>Selamat datang</p>
+        <h1>Selamat datang di LCHP Blog</h1>
+        <p>Temukan artikel yang Anda cari</p>
         <div>
-            <input type="text" id="searchInput" placeholder="Cari..." oninput="showPreview()">
+            <input type="text" id="searchInput" placeholder="Cari artikel...">
             <button onclick="search()">Cari</button>
         </div>
-        <div id="fileList"></div>
+        <div id="searchResults"></div>
     </div>
 
     <script>
-        function showPreview() {
+        function search() {
             var searchTerm = document.getElementById("searchInput").value.toLowerCase();
-            var apiUrl = "https://api.github.com/repos/lexiiz3417/LCHP/contents/";
-            var fileListContainer = document.getElementById("fileList");
-            fileListContainer.innerHTML = "";
+            var apiUrl = "https://api.github.com/repos/lexiiz3417/lexiiz3417.github.io/contents/LCHP";
 
             fetch(apiUrl)
                 .then(response => response.json())
                 .then(data => {
-                    var matchedFiles = data.filter(item => item.name.toLowerCase().includes(searchTerm));
-                    if (matchedFiles.length > 0) {
-                        matchedFiles.forEach(function(file) {
-                            var link = document.createElement("a");
-                            link.href = file.html_url;
-                            link.textContent = file.name.replace('.html', '');
-                            fileListContainer.appendChild(link);
-                        });
-                        fileListContainer.style.display = "block";
-                    } else {
-                        fileListContainer.style.display = "none";
-                    }
+                    var searchResults = data.filter(item => item.name.toLowerCase().includes(searchTerm));
+                    displaySearchResults(searchResults);
                 })
                 .catch(error => console.error('Error:', error));
         }
 
-        function search() {
-            var searchTerm = document.getElementById("searchInput").value.toLowerCase();
-            window.location.href = "https://lexiiz3417.github.io/LCHP/" + searchTerm + ".html";
+        function displaySearchResults(results) {
+            var searchResultsContainer = document.getElementById("searchResults");
+            searchResultsContainer.innerHTML = "";
+
+            if (results.length > 0) {
+                results.forEach(function(result) {
+                    var link = document.createElement("a");
+                    link.href = result.html_url;
+                    link.textContent = result.name.replace('.html', '');
+                    searchResultsContainer.appendChild(link);
+                });
+            } else {
+                searchResultsContainer.textContent = "Tidak ada hasil yang ditemukan";
+            }
         }
     </script>
 </body>
