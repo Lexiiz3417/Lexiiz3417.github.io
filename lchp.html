@@ -10,6 +10,7 @@
             color: #fff;
             font-family: Courier, monospace;
             padding: 20px;
+            margin-top: 50px; /* Untuk memberi ruang di atas konten agar search bar tidak menutupinya */
         }
         footer {
             text-align: right;
@@ -24,23 +25,38 @@
             cursor: pointer;
             margin-top: 20px;
         }
-        #search-bar {
-            margin-bottom: 20px;
-            padding: 10px;
-            border: none;
-            border-radius: 5px;
+        #search-container {
+            position: fixed;
+            top: 0;
+            left: 0;
             width: 100%;
+            background-color: #333; /* Warna latar belakang search bar */
+            padding: 10px 20px;
             box-sizing: border-box;
+            z-index: 999; /* Untuk memastikan search bar berada di atas konten */
         }
-        h1 {
-            text-align: center; /* Menjadikan judul rata tengah */
+        #search-input {
+            padding: 8px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            margin-right: 5px;
+        }
+        #search-btn {
+            padding: 8px 20px;
+            border: none;
+            background-color: #444; /* Warna tombol search */
+            color: #fff;
+            border-radius: 5px;
+            cursor: pointer;
         }
     </style>
 </head>
 <body>
+<center>
     <h1>LCHP Notes</h1>
-    <input type="text" id="search-bar" placeholder="Carinya disini bg...">
-    <h1>External Oblique Exercises</h1>
+</center>
+<div id="content">
+    <h2>External Oblique Exercise</h2>
     <ol>
         <li>Russian twist</li>
         <li>Side plank</li>
@@ -68,33 +84,40 @@
         <li>Hanging Oblique Raise</li>
         <li>Oblique V-up</li>
     </ol>
-    <button id="print-btn" onclick="saveText()">Print to File</button>
+    <h2>Internal Oblique Exercise</h2>
+    <ol>
+        <li>Russian twist</li>
+        <!-- Remaining list items -->
+    </ol>
     
     <footer>-Lexiiz3417</footer>
+</div>
 
-    <script>
-        document.getElementById('search-bar').addEventListener('input', function() {
-            var searchText = this.value.toLowerCase();
-            var allText = document.body.innerText.toLowerCase();
-            var matches = allText.match(new RegExp(searchText, 'g'));
-            if (matches) {
-                document.body.innerHTML = document.body.innerHTML.replace(new RegExp('<span class="highlight">', 'g'), '');
-                matches.forEach(function(match) {
-                    var regex = new RegExp(match, 'g');
-                    allText = allText.replace(regex, '<span class="highlight">' + match + '</span>');
-                });
-                document.body.innerHTML = allText;
+<div id="search-container">
+    <input type="text" id="search-input" placeholder="Search...">
+    <button id="search-btn" onclick="searchContent()">Search</button>
+</div>
+
+<script>
+    function searchContent() {
+        var input, filter, div, lists, li, i, txtValue;
+        input = document.getElementById("search-input");
+        filter = input.value.toUpperCase();
+        div = document.getElementById("content");
+        lists = div.getElementsByTagName("ol");
+        for (var j = 0; j < lists.length; j++) {
+            li = lists[j].getElementsByTagName("li");
+            for (i = 0; i < li.length; i++) {
+                txtValue = li[i].textContent || li[i].innerText;
+                if (txtValue.toUpperCase().indexOf(filter) > -1) {
+                    li[i].style.display = "";
+                } else {
+                    li[i].style.display = "none";
+                }
             }
-        });
-
-        function saveText() {
-            var textToSave = document.body.innerText;
-            var hiddenElement = document.createElement('a');
-            hiddenElement.href = 'data:text/plain;charset=utf-8,' + encodeURIComponent(textToSave);
-            hiddenElement.target = '_blank';
-            hiddenElement.download = 'oblique_exercises.txt';
-            hiddenElement.click();
         }
-    </script>
+    }
+</script>
+
 </body>
 </html>
