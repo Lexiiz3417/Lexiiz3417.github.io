@@ -47,17 +47,10 @@ input[type="text"] {
     background-color: #121212; /* Warna latar belakang gelap */
     color: #FFFFFF; /* Warna teks */
     font-family: 'Courier New', Courier, monospace; /* Font Courier New */
-    padding-left: 40px; /* Tambahkan ruang di kiri untuk ikon search */
 }
 
 input[type="text"]::placeholder {
     color: #FFFFFF; /* Warna teks placeholder */
-}
-
-.fa-search {
-    position: absolute; /* Jadikan posisi absolut untuk ikon search */
-    left: 15px; /* Atur posisi ikon search di sisi kiri input */
-    color: #FFFFFF; /* Warna ikon search */
 }
 
 #searchResults {
@@ -91,8 +84,7 @@ input[type="text"]::placeholder {
         <h1>LCHP NOTES</h1>
         <p>Sebuah tempat yang berisi catatan-catatan karya member dan admin LC: Healthy Program</p>
  <div class="search-container">
-    <center><i class="fas fa-search"></i>
-    <input type="text" id="searchInput" placeholder="Search notes..." oninput="search()"></center>
+    <input type="text" id="searchInput" placeholder="Search notes..." oninput="search()">
 </div>
         <div id="searchResults"></div>
     </div>
