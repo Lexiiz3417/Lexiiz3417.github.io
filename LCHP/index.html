@@ -34,6 +34,7 @@ p {
     position: relative; /* Jadikan posisi relatif untuk posisi absolut ikon search */
     display: flex; /* Gunakan flex untuk mengatur posisi ikon */
     align-items: center; /* Posisikan ikon secara vertikal di tengah input */
+    justify-content: center; /* Posisikan input secara horizontal di tengah container */
     margin: 0 auto; /* Rata tengah container pencarian */
 }
 
@@ -91,7 +92,8 @@ input[type="text"]::placeholder {
         <h1>LCHP NOTES</h1>
         <p>Sebuah tempat yang berisi catatan-catatan karya member dan admin LC: Healthy Program</p>
         <div class="search-container">
-            <input type="text" id="searchInput" placeholder="<i class="fas fa-search"></i> Search notes..." oninput="search()">
+<i class="fas fa-search"></i>
+            <input type="text" id="searchInput" placeholder="Search notes..." oninput="search()">
         </div>
         <div id="searchResults"></div>
     </div>
