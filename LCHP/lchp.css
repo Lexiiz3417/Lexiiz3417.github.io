@@ -2,8 +2,8 @@ body {
     background-color: #121212; /* Warna latar belakang gelap */
     color: #FFFFFF; /* Warna teks */
     font-family: 'Courier New', Courier, monospace; /* Font Courier New */
-    margin: 0;
-    padding: 0;
+    margin: 5px;
+    padding: 5px;
     min-height: 100vh;
 }
 
@@ -17,7 +17,8 @@ body {
 h1 {
     text-align: center;
 }
-
+a {
+    color: white;}
 p {
     line-height: 1.5;
 }
