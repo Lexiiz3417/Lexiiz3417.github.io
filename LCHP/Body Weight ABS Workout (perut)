@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <title>Program Olahraga Body Weight - ABS</title>
+    <link rel="stylesheet" href="lchp.css">
+</head>
+<body>
+    <h1>Program Olahraga Body Weight - ABS</h1>
+    <p>Program ini terdiri dari 5 latihan body weight yang bisa Anda lakukan di rumah untuk melatih otot perut Anda. Lakukan program ini 3-4 kali dalam seminggu dengan istirahat 1 menit antara set.</p>
+    <table>
+        <tr>
+            <th>Latihan</th>
+            <th>Repetisi</th>
+            <th>Set</th>
+        </tr>
+        <tr>
+            <td>Crunch</td>
+            <td>10-12</td>
+            <td>3</td>
+        </tr>
+        <tr>
+            <td>Bicycle crunch</td>
+            <td>10-12</td>
+            <td>3</td>
+        </tr>
+        <tr>
+            <td>Plank</td>
+            <td>Selama mungkin</td>
+            <td>3</td>
+        </tr>
+        <tr>
+            <td>Leg lift</td>
+            <td>10-12</td>
+            <td>3</td>
+        </tr>
+        <tr>
+            <td>Mountain climber</td>
+            <td>10-12</td>
+            <td>3</td>
+        </tr>
+    </table>
+</body>
+</html>
