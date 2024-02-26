@@ -71,7 +71,7 @@ table {
     width: 80%;
     margin: 0 auto;
     border-collapse: collapse;
-    font-size: 16px; /* Sesuaikan ukuran teks di dalam tabel */
+    font-size: 18px; /* Sesuaikan ukuran teks di dalam tabel */
 }
 
 th, td {
