@@ -67,7 +67,3 @@ input[type="text"]::placeholder {
     text-overflow: ellipsis; /* Tampilkan elipsis untuk teks yang terpotong */
 }
 
-table {
-    font-size: 16px; /* Sesuaikan ukuran teks di tabel */
-    border: 1px solid #FFFFFF; /* Beri border putih untuk tabel */
-}
