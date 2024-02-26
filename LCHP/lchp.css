@@ -1,1 +1,68 @@
-tes
+body {
+    background-color: #121212; /* Warna latar belakang gelap */
+    color: #FFFFFF; /* Warna teks */
+    font-family: 'Courier New', Courier, monospace; /* Font Courier New */
+    margin: 0;
+    padding: 0;
+    min-height: 100vh;
+}
+
+.container {
+    width: 80%;
+    padding: 20px;
+    text-align: center;
+    margin: 0 auto; /* Rata tengah container */
+}
+
+h1 {
+    text-align: center;
+}
+
+p {
+    line-height: 1.5;
+}
+
+.search-container {
+    position: relative; /* Jadikan posisi relatif untuk posisi absolut ikon search */
+    display: flex; /* Gunakan flex untuk mengatur posisi ikon */
+    align-items: center; /* Posisikan ikon secara vertikal di tengah input */
+    justify-content: center; /* Posisikan input secara horizontal di tengah */
+    margin: 20px auto; /* Atur margin atas dan bawah menjadi 20px dan rata tengah horizontal */
+}
+
+input[type="text"] {
+    padding: 8px;
+    border-radius: 30px; /* Bentuk kapsul memanjang */
+    border: 1px solid #FFFFFF; /* Tambahkan border */
+    background-color: #121212; /* Warna latar belakang gelap */
+    color: #FFFFFF; /* Warna teks */
+    font-family: 'Courier New', Courier, monospace; /* Font Courier New */
+}
+
+input[type="text"]::placeholder {
+    color: #FFFFFF; /* Warna teks placeholder */
+}
+
+#searchResults {
+    margin-top: 20px;
+    text-align: center; /* Rata tengah hasil pencarian */
+    display: flex; /* Jadikan hasil pencarian terlihat berdampingan */
+    flex-wrap: wrap; /* Pastikan hasil pencarian bisa dibungkus */
+    justify-content: center; /* Letakkan hasil pencarian di tengah */
+}
+
+#searchResults a {
+    display: block;
+    color: #FFFFFF;
+    text-decoration: none;
+    margin: 5px; /* Ubah margin untuk memberikan jarak antar hasil */
+    padding: 8px;
+    border-radius: 5px;
+    border: 1px solid #FFFFFF; /* Tambahkan border */
+    line-height: 1.6; /* Sesuaikan line-height agar tidak ada ruang ekstra */
+    text-align: center; /* Rata tengah teks */
+    flex-grow: 1; /* Biarkan hasil pencarian tumbuh seiring kebutuhan */
+    max-width: 40%; /* Batasi lebar hasil pencarian */
+    overflow: hidden; /* Sembunyikan overflow jika teks terlalu panjang */
+    text-overflow: ellipsis; /* Tampilkan elipsis untuk teks yang terpotong */
+}
