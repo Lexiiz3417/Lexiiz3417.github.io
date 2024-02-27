@@ -68,20 +68,6 @@ input[type="text"]::placeholder {
     text-overflow: ellipsis; /* Tampilkan elipsis untuk teks yang terpotong */
 }
 
-table {
-    width: 80%;
-    margin: 0 auto;
-    border-collapse: collapse;
-    
-}
-
-th, td {
-    border: 1px solid #FFFFFF;
-    padding: 8px;
-    text-align: left;
-    font-size: 25px;
-}
-
 .floating-icon {
     position: fixed;
     bottom: 20px;
