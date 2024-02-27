@@ -35,7 +35,7 @@
             fetch(apiUrl)
                 .then(response => response.json())
                 .then(data => {
-                    var blacklistedFiles = ["index.html", "timesince.js", "lchp.css"]; // Nama file yang ingin di-blacklist
+                    var blacklistedFiles = ["index.html", "timesince.js", "lchp.css", "lchp.png", "lchpfav.png"]; // Nama file yang ingin di-blacklist
                     var searchResults = data.filter(item => 
                         item.name.toLowerCase().includes(searchTerm) && 
                         !blacklistedFiles.includes(item.name) && // Memastikan nama file tidak termasuk dalam daftar blacklistedFiles
