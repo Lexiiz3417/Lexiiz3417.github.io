@@ -99,7 +99,7 @@ th, td {
 .floating-icon i {
     font-size: 24px;
     color: #333;
-    background-color: rgba(255, 255, 255, 0.7); /* Warna latar belakang transparan */
+    background-color: transarent; /* Warna latar belakang transparan */
     border-radius: 50%;
     padding: 10px;
     box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
