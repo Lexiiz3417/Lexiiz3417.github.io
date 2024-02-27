@@ -81,3 +81,26 @@ th, td {
     text-align: left;
     font-size: 25px;
 }
+
+.floating-icon {
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    z-index: 999;
+}
+
+.floating-icon i {
+    font-size: 24px;
+    color: #333;
+    background-color: #fff;
+    border-radius: 50%;
+    padding: 10px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+    cursor: pointer;
+    transition: background-color 0.3s, box-shadow 0.3s;
+}
+
+.floating-icon i:hover {
+    background-color: #ddd;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+}
