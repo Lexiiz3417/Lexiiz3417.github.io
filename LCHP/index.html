@@ -5,15 +5,15 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>LCHP NOTES</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
-<link rel="stylesheet" href="https://Lexiiz3417.github.io/LCHP/lchp.css">
+    <link rel="stylesheet" href="https://Lexiiz3417.github.io/LCHP/lchp.css">
 </head>
 <body>
     <div class="container">
         <h1>LCHP NOTES</h1>
         <p>Sebuah tempat yang berisi catatan-catatan karya member dan admin LC: Healthy Program</p>
- <div class="search-container">
-    <input type="text" id="searchInput" placeholder="Search notes..." oninput="search()">
-</div>
+        <div class="search-container">
+            <input type="text" id="searchInput" placeholder="Search notes..." oninput="search()">
+        </div>
         <div id="searchResults"></div>
     </div>
 
@@ -25,7 +25,12 @@
             fetch(apiUrl)
                 .then(response => response.json())
                 .then(data => {
-                    var searchResults = data.filter(item => item.name.toLowerCase().includes(searchTerm) && !item.name.includes("index.html"));
+                    var blacklistedFiles = ["index.html", "timesince.js", "lchp.css"]; // Nama file yang ingin di-blacklist
+                    var searchResults = data.filter(item => 
+                        item.name.toLowerCase().includes(searchTerm) && 
+                        !blacklistedFiles.includes(item.name) && // Memastikan nama file tidak termasuk dalam daftar blacklistedFiles
+                        item.type === "file" // Memastikan item adalah file, bukan direktori
+                    );
                     displaySearchResults(searchResults);
                 })
                 .catch(error => console.error('Error:', error));
