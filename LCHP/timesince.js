@@ -1,39 +1,23 @@
-// Fungsi untuk mengonversi waktu dalam detik menjadi format jam:menit:detik
-function formatTime(seconds) {
-  let hours = Math.floor(seconds / 3600);
-  let minutes = Math.floor((seconds % 3600) / 60);
-  let secs = Math.floor(seconds % 60);
+// Fungsi untuk menghitung jumlah hari dari tanggal tertentu hingga sekarang
+function countDays(startDate) {
+  let now = new Date(); // Waktu saat ini
+  let start = new Date(startDate); // Waktu mulai
+  let timeDiff = Math.abs(now.getTime() - start.getTime()); // Selisih waktu dalam milidetik
+  let diffDays = Math.ceil(timeDiff / (1000 * 3600 * 24)); // Konversi ke jumlah hari
   
-  hours = (hours < 10) ? "0" + hours : hours;
-  minutes = (minutes < 10) ? "0" + minutes : minutes;
-  secs = (secs < 10) ? "0" + secs : secs;
-  
-  return hours + ":" + minutes + ":" + secs;
-}
-
-// Fungsi untuk menghitung waktu dari tanggal tertentu hingga sekarang
-function countTime(startDate) {
-  let now = new Date().getTime(); // Waktu saat ini dalam milidetik
-  
-  let diff = now - startDate; // Selisih waktu dalam milidetik
-  let seconds = Math.floor(diff / 1000); // Konversi ke detik
-  
-  return formatTime(seconds);
+  return diffDays;
 }
 
 // Fungsi untuk menambahkan nama dan waktu ke dalam list
 function addWorkout(name, startDate) {
   let list = document.getElementById("workout-list");
   let listItem = document.createElement("li");
-  listItem.textContent = name + ", mulai workout sejak " + countTime(startDate) + " hari yang lalu";
+  let days = countDays(startDate);
+  listItem.innerHTML = "<strong>" + name + "</strong>, mulai workout sejak <strong>" + days + " hari yang lalu</strong>";
   list.appendChild(listItem);
 }
 
 // Contoh penggunaan fungsi addWorkout
-let lexiiStartDate = new Date("July 18, 2022 00:00:00").getTime(); // Contoh waktu mulai Lexiiz3417
-addWorkout("Lexiiz3417", lexiiStartDate); // nambah list
-
-// let orangStartDate = new Date("July 20, 2022 00:00:00").getTime(); 
-// add workout("orang", orangStartDate);
-
-
+let lexiiStartDate = "July 18, 2022";
+addWorkout("Lexiiz3417", lexiiStartDate);
+// Contoh waktu mulai Lexiiz3417
