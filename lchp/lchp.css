@@ -106,51 +106,30 @@ input[type="text"]::placeholder {
     opacity: 0.7; /* Opasitas yang diinginkan saat tidak dihover */
 }
 
-body.dark-theme {
-    background-color: #121212; /* Warna latar belakang gelap */
-    color: #FFFFFF; /* Warna teks */
-}
-
-body.light-theme {
-    background-color: #FFFFFF; /* Warna latar belakang terang */
-    color: #333333; /* Warna teks */
-}
-
-.floating-icon {
+/* CSS for floating theme button */
+.floating-theme-button {
     position: fixed;
     top: 20px;
     right: 20px;
     z-index: 999;
-}
-
-.floating-icon a {
+    cursor: pointer;
+    background-color: #ffffff;
+    color: #333333;
+    border-radius: 50%;
+    width: 50px;
+    height: 50px;
     display: flex;
     align-items: center;
     justify-content: center;
-    text-decoration: none;
-}
-
-.floating-icon i {
-    font-size: 24px;
-    color: #333;
-    background-color: transparent; /* Warna latar belakang transparan */
-    border-radius: 50%;
-    padding: 10px;
     box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
-    cursor: pointer;
-    transition: background-color 0.3s, box-shadow 0.3s, opacity 0.3s; /* Animasi transisi opasitas */
+    transition: background-color 0.3s, box-shadow 0.3s;
 }
 
-.floating-icon i:hover {
-    background-color: rgba(255, 255, 255, 0.9); /* Warna latar belakang transparan saat hover */
+.floating-theme-button:hover {
+    background-color: #f0f0f0;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
 }
 
-.icon-text {
-    margin-left: 5px; /* Jarak antara ikon dan teks */
-}
-
-/* Mengatur opasitas ikon saat tidak dihover */
-.floating-icon i:not(:hover) {
-    opacity: 0.7; /* Opasitas yang diinginkan saat tidak dihover */
+.floating-theme-button i {
+    font-size: 20px;
 }
