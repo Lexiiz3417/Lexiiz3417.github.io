@@ -115,7 +115,7 @@ input[type="text"]::placeholder {
 /* CSS for floating theme button */
 .floating-theme-button {
     position: fixed;
-    top: 20px;
+    top: 20px; /* Adjusted position to keep it fixed at the top */
     right: 20px;
     z-index: 999;
     cursor: pointer;
