@@ -103,8 +103,7 @@ input[type="text"]::placeholder {
 
 /* Add the following CSS to fix the position of the floating back button */
 .floating-icon.back-button {
-    bottom: unset;
-    top: 20px; /* Keep the back button fixed at the top */
+    bottom: 20px;
 }
 
 /* Mengatur opasitas ikon saat tidak dihover */
