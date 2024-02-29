@@ -30,7 +30,7 @@
     <script>
         function search() {
             var searchTerm = document.getElementById("searchInput").value.toLowerCase();
-            var apiUrl = "https://api.github.com/repos/lexiiz3417/lexiiz3417.github.io/contents/LCHP";
+            var apiUrl = "https://api.github.com/repos/lexiiz3417/lexiiz3417.github.io/contents/lchp";
 
             fetch(apiUrl)
                 .then(response => response.json())
@@ -53,8 +53,8 @@
             if (results.length > 0) {
                 results.forEach(function(result) {
                     var link = document.createElement("a");
-                    var relativeUrl = result.path.replace("LCHP/", "");
-                    link.href = "https://" + window.location.hostname + "/LCHP/" + relativeUrl;
+                    var relativeUrl = result.path.replace("lchp/", "");
+                    link.href = "https://" + window.location.hostname + "/lchp/" + relativeUrl;
                     link.textContent = result.name.replace('.html', '');
                     searchResultsContainer.appendChild(link);
                 });
