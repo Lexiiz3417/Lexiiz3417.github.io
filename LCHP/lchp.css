@@ -17,8 +17,11 @@ body {
 h1 {
     text-align: center;
 }
+
 a {
-    color: white;}
+    color: white;
+}
+
 p {
     line-height: 1.5;
 }
@@ -84,7 +87,7 @@ input[type="text"]::placeholder {
 .floating-icon i {
     font-size: 24px;
     color: #333;
-    background-color: transarent; /* Warna latar belakang transparan */
+    background-color: transparent; /* Warna latar belakang transparan */
     border-radius: 50%;
     padding: 10px;
     box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
