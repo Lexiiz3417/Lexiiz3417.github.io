@@ -1,68 +1,185 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="id">
 <head>
-<meta charset="UTF-8">
+    <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>LCHP NOTES</title>
-    
-    <!-- Favicon -->
-    <link rel="icon" type="image/png" href="https://lexiiz3417.github.io/lchp/lchpfav.png">
-    
-    <!-- Open Graph meta tags for social sharing -->
-    <meta property="og:title" content="LCHP NOTES">
-    <meta property="og:description" content="Sebuah tempat yang berisi catatan-catatan karya member dan admin LC: Healthy Program">
-    <meta property="og:image" content="https://lexiiz3417.github.io/lchp/lchp.png">
-    <meta property="og:url" content="https://lexiiz3417.github.io">
-
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
-    <link rel="stylesheet" href="https://lexiiz3417.github.io/lchp/lchp.css">
-    <script src="https://lexiiz3417.github.io/lchp/lchp.js"></script>
+    <title>LCHP Search</title>
+    <link rel="icon" href="lchpfav.png" type="image/png">
+    <style>
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+            line-height: 1.6;
+            margin: 0;
+            padding: 20px;
+            background-color: #f4f4f4;
+            color: #333;
+        }
+        .container {
+            max-width: 800px;
+            margin: auto;
+            background: #fff;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0,0,0,0.1);
+        }
+        h1 {
+            text-align: center;
+            color: #2c3e50;
+        }
+        .search-container {
+            display: flex;
+            gap: 10px;
+            align-items: center;
+            margin-bottom: 20px;
+        }
+        #searchInput {
+            flex-grow: 1;
+            padding: 10px;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            font-size: 16px;
+        }
+        #categorySelect {
+            padding: 10px;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            background-color: #fff;
+            font-size: 16px;
+        }
+        #searchButton {
+            padding: 10px 15px;
+            border: none;
+            background-color: #3498db;
+            color: white;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 16px;
+        }
+        #searchButton:hover {
+            background-color: #2980b9;
+        }
+        #searchResults ul {
+            list-style-type: none;
+            padding: 0;
+        }
+        #searchResults li {
+            background-color: #ecf0f1;
+            margin-bottom: 5px;
+            border-radius: 4px;
+        }
+        #searchResults li a {
+            display: block;
+            padding: 10px;
+            text-decoration: none;
+            color: #2c3e50;
+        }
+        #searchResults li a:hover {
+            background-color: #bdc3c7;
+        }
+        .searching, .error {
+            color: #7f8c8d;
+        }
+    </style>
 </head>
 <body>
+
     <div class="container">
-        <h1>LCHP NOTES</h1>
-        <p>Sebuah tempat yang berisi catatan-catatan buatan member dan admin LC: Healthy Program</p>
+        <h1>LCHP Search</h1>
+        
         <div class="search-container">
-            <input type="text" id="searchInput" placeholder="Search notes..." oninput="search()">
+            <input type="text" id="searchInput" placeholder="Cari sesuatu...">
+            <select id="categorySelect" aria-label="Pilih Kategori">
+                <option value="all">di Semua Kategori</option>
+                <option value="notes">di notes</option>
+                <option value="tools">di tools</option>
+                </select>
+            <button id="searchButton">Cari</button>
         </div>
+
         <div id="searchResults"></div>
     </div>
 
     <script>
-        function search() {
-            var searchTerm = document.getElementById("searchInput").value.toLowerCase();
-            var apiUrl = "https://api.github.com/repos/lexiiz3417/lexiiz3417.github.io/contents/lchp";
+        // Fungsi utama untuk menjalankan pencarian
+        async function search() {
+            const searchTerm = document.getElementById("searchInput").value.toLowerCase();
+            const selectedCategory = document.getElementById("categorySelect").value; // Ambil kategori yang dipilih
+            const resultsDiv = document.getElementById("searchResults");
+            resultsDiv.innerHTML = '<p class="searching">Mencari file...</p>';
 
-            fetch(apiUrl)
-                .then(response => response.json())
-                .then(data => {
-                    var blacklistedFiles = ["index.html", "lchp.js", "timesince.js", "lchp.css", "lchp.png", "lchpfav.png"]; // Nama file yang ingin di-blacklist
-                    var searchResults = data.filter(item => 
-                        item.name.toLowerCase().includes(searchTerm) && 
-                        !blacklistedFiles.includes(item.name) && // Memastikan nama file tidak termasuk dalam daftar blacklistedFiles
-                        item.type === "file" // Memastikan item adalah file, bukan direktori
-                    );
-                    displaySearchResults(searchResults);
-                })
-                .catch(error => console.error('Error:', error));
-        }
+            // Daftar file yang tidak ingin ditampilkan di hasil pencarian
+            const blacklistedFiles = ["index.html", "timesince.js", "lchp.css", "lchp.png", "lchpfav.png", "lchp.js"];
+            
+            // Konfigurasi repository Anda
+            const owner = "lexiiz3417";
+            const repo = "lexiiz3417.github.io";
+            const basePath = "lchp";
 
-        function displaySearchResults(results) {
-            var searchResultsContainer = document.getElementById("searchResults");
-            searchResultsContainer.innerHTML = "";
+            try {
+                // Menggunakan API GitHub untuk mengambil semua file secara rekursif
+                const response = await fetch(`https://api.github.com/repos/${owner}/${repo}/git/trees/main?recursive=1`);
+                if (!response.ok) {
+                    throw new Error(`Gagal mengambil data dari GitHub: ${response.statusText}`);
+                }
+                const data = await response.json();
 
-            if (results.length > 0) {
-                results.forEach(function(result) {
-                    var link = document.createElement("a");
-                    var relativeUrl = result.path.replace("lchp/", "");
-                    link.href = "https://" + window.location.hostname + "/lchp/" + relativeUrl;
-                    link.textContent = result.name.replace('.html', '');
-                    searchResultsContainer.appendChild(link);
+                // Filter file yang berada di dalam path 'lchp' dan sesuai kriteria
+                const searchResults = data.tree.filter(item => {
+                    const isFile = item.type === 'blob';
+                    const isInBasePath = item.path.startsWith(basePath + '/');
+                    const fileName = item.path.split('/').pop(); // Ambil nama filenya saja
+                    const isNotBlacklisted = !blacklistedFiles.includes(fileName);
+                    const matchesSearch = item.path.toLowerCase().includes(searchTerm);
+
+                    // KONDISI BARU UNTUK KATEGORI
+                    // Cek apakah file berada di dalam kategori yang dipilih. Jika "all", lewati pengecekan ini.
+                    const isInSelectedCategory = (selectedCategory === 'all') || item.path.startsWith(`${basePath}/${selectedCategory}/`);
+
+                    return isFile && isInBasePath && isNotBlacklisted && matchesSearch && isInSelectedCategory;
                 });
-            } else {
-                searchResultsContainer.textContent = "Tidak ada hasil yang ditemukan";
+
+                displaySearchResults(searchResults, basePath);
+
+            } catch (error) {
+                console.error('Error:', error);
+                resultsDiv.innerHTML = '<p class="error">Gagal melakukan pencarian. Silakan coba lagi.</p>';
             }
         }
+
+        // Fungsi untuk menampilkan hasil pencarian
+        function displaySearchResults(results, basePath) {
+            const resultsDiv = document.getElementById("searchResults");
+            resultsDiv.innerHTML = ""; // Kosongkan hasil sebelumnya
+
+            if (results.length === 0) {
+                resultsDiv.innerHTML = "<p>File tidak ditemukan.</p>";
+                return;
+            }
+
+            const list = document.createElement("ul");
+            results.forEach(item => {
+                const listItem = document.createElement("li");
+                const link = document.createElement("a");
+                
+                // Menggunakan item.path untuk membuat URL
+                link.href = `/${item.path}`; 
+                
+                // Menghilangkan 'lchp/' dari teks yang ditampilkan agar lebih rapi
+                link.textContent = item.path.replace(basePath + '/', ''); 
+                
+                listItem.appendChild(link);
+                list.appendChild(listItem);
+            });
+            resultsDiv.appendChild(list);
+        }
+
+        // Menambahkan event listener untuk tombol search dan input
+        document.getElementById("searchButton").addEventListener("click", search);
+        document.getElementById("searchInput").addEventListener("keyup", function(event) {
+            if (event.key === "Enter") {
+                search();
+            }
+        });
     </script>
 
 </body>
