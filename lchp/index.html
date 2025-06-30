@@ -5,99 +5,42 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>LCHP Search</title>
     <link rel="icon" href="lchpfav.png" type="image/png">
+    
+    <link rel="stylesheet" href="lchp.css">
+    
     <style>
-        body {
-            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
-            line-height: 1.6;
-            margin: 0;
-            padding: 20px;
-            background-color: #f4f4f4;
-            color: #333;
-        }
-        .container {
-            max-width: 800px;
-            margin: auto;
-            background: #fff;
-            padding: 20px;
-            border-radius: 8px;
-            box-shadow: 0 0 10px rgba(0,0,0,0.1);
-        }
-        h1 {
-            text-align: center;
-            color: #2c3e50;
-        }
         .search-container {
             display: flex;
+            flex-wrap: wrap; /* Agar responsif di layar kecil */
             gap: 10px;
             align-items: center;
             margin-bottom: 20px;
         }
+        .search-container > input,
+        .search-container > select,
+        .search-container > button {
+            flex-grow: 1; /* Agar bisa membesar */
+        }
         #searchInput {
-            flex-grow: 1;
-            padding: 10px;
-            border: 1px solid #ddd;
-            border-radius: 4px;
-            font-size: 16px;
-        }
-        #categorySelect {
-            padding: 10px;
-            border: 1px solid #ddd;
-            border-radius: 4px;
-            background-color: #fff;
-            font-size: 16px;
-        }
-        #searchButton {
-            padding: 10px 15px;
-            border: none;
-            background-color: #3498db;
-            color: white;
-            border-radius: 4px;
-            cursor: pointer;
-            font-size: 16px;
-        }
-        #searchButton:hover {
-            background-color: #2980b9;
-        }
-        #searchResults ul {
-            list-style-type: none;
-            padding: 0;
-        }
-        #searchResults li {
-            background-color: #ecf0f1;
-            margin-bottom: 5px;
-            border-radius: 4px;
-        }
-        #searchResults li a {
-            display: block;
-            padding: 10px;
-            text-decoration: none;
-            color: #2c3e50;
-        }
-        #searchResults li a:hover {
-            background-color: #bdc3c7;
-        }
-        .searching, .error {
-            color: #7f8c8d;
+            flex-basis: 300px; /* Lebar dasar untuk input pencarian */
         }
     </style>
 </head>
 <body>
 
-    <div class="container">
-        <h1>LCHP Search</h1>
-        
-        <div class="search-container">
-            <input type="text" id="searchInput" placeholder="Cari sesuatu...">
-            <select id="categorySelect" aria-label="Pilih Kategori">
-                <option value="all">di Semua Kategori</option>
-                <option value="notes">di notes</option>
-                <option value="tools">di tools</option>
-                </select>
-            <button id="searchButton">Cari</button>
-        </div>
-
-        <div id="searchResults"></div>
+    <h1>LCHP Search</h1>
+    
+    <div class="search-container">
+        <input type="text" id="searchInput" placeholder="Cari sesuatu...">
+        <select id="categorySelect" aria-label="Pilih Kategori">
+            <option value="all">di Semua Kategori</option>
+            <option value="notes">di notes</option>
+            <option value="tools">di tools</option>
+            </select>
+        <button id="searchButton">Cari</button>
     </div>
+
+    <div id="searchResults"></div>
 
     <script>
         // Fungsi utama untuk menjalankan pencarian
@@ -105,7 +48,7 @@
             const searchTerm = document.getElementById("searchInput").value.toLowerCase();
             const selectedCategory = document.getElementById("categorySelect").value; // Ambil kategori yang dipilih
             const resultsDiv = document.getElementById("searchResults");
-            resultsDiv.innerHTML = '<p class="searching">Mencari file...</p>';
+            resultsDiv.innerHTML = '<p>Mencari file...</p>';
 
             // Daftar file yang tidak ingin ditampilkan di hasil pencarian
             const blacklistedFiles = ["index.html", "timesince.js", "lchp.css", "lchp.png", "lchpfav.png", "lchp.js"];
