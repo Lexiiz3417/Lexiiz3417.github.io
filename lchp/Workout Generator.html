@@ -129,6 +129,11 @@
             background-color: #ff4136;
             border: 1px solid #ff4136;
             color: #fff;
+            /* Style baru untuk mengakomodasi ikon */
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px; /* Jarak antara ikon dan teks */
         }
         #copy-button:hover {
             background-color: #fff;
@@ -140,16 +145,14 @@
             font-size: 14px;
             text-align: center;
         }
-
-        /* LANGKAH 3: CSS UNTUK FLOATING BUTTON */
         .back-button {
-            position: fixed; /* Kunci agar tombol tetap di posisi yang sama */
+            position: fixed;
             bottom: 25px;
             left: 25px;
-            z-index: 1000; /* Memastikan tombol ada di atas konten lain */
+            z-index: 1000;
             background-color: #2c2c2c;
             padding: 10px;
-            border-radius: 50px; /* Membuatnya bulat */
+            border-radius: 50px;
             border: 1px solid #555;
             box-shadow: 0 4px 8px rgba(0,0,0,0.3);
             transition: all 0.3s ease;
@@ -159,7 +162,7 @@
             align-items: center;
             text-decoration: none;
             color: #ffffff;
-            font-size: 18px; /* Ukuran Ikon */
+            font-size: 18px;
         }
         .back-button .icon-text {
             visibility: hidden;
@@ -167,18 +170,17 @@
             width: 0;
             margin-left: 0;
             transition: all 0.3s ease;
-            font-size: 14px; /* Ukuran teks */
+            font-size: 14px;
         }
         .back-button:hover {
-            padding-right: 20px; /* Memberi ruang untuk teks saat hover */
+            padding-right: 20px;
         }
         .back-button:hover .icon-text {
             visibility: visible;
             opacity: 1;
-            width: auto; /* Lebar otomatis sesuai konten */
-            margin-left: 8px; /* Jarak antara ikon dan teks */
+            width: auto;
+            margin-left: 8px;
         }
-
     </style>
 </head>
 <body>
@@ -239,7 +241,10 @@
     <div id="result-container">
         <h3>Prompt Profesional Siap Digunakan!</h3>
         <pre id="prompt-output"></pre>
-        <button id="copy-button">Salin Prompt</button>
+        <button id="copy-button">
+            <i class="fas fa-copy"></i> 
+            <span class="button-text">Salin Prompt</span>
+        </button>
     </div>
 </div>
 
@@ -253,6 +258,7 @@
     const promptOutput = document.getElementById('prompt-output');
     const copyButton = document.getElementById('copy-button');
 
+    // ... (Fungsi workoutForm.addEventListener tetap sama) ...
     workoutForm.addEventListener('submit', function(e) {
         e.preventDefault();
 
@@ -317,18 +323,36 @@ Anda adalah seorang Pelatih Pribadi (Personal Trainer) dan Ahli Gizi bersertifik
         
         promptOutput.textContent = prompt.trim();
         resultContainer.style.display = 'block';
-        copyButton.textContent = 'Salin Prompt';
+        
+        // Reset tombol ke kondisi awal setiap kali prompt baru dibuat
+        const icon = copyButton.querySelector('i');
+        const text = copyButton.querySelector('.button-text');
+        icon.className = 'fas fa-copy';
+        text.textContent = 'Salin Prompt';
+
         resultContainer.scrollIntoView({ behavior: 'smooth', block: 'end' });
     });
 
+
+    // --- FUNGSI TOMBOL SALIN BARU YANG LEBIH CANGGIH ---
     copyButton.addEventListener('click', function() {
         const textToCopy = promptOutput.textContent;
+        const icon = this.querySelector('i');
+        const text = this.querySelector('.button-text');
+
         if (!textToCopy) return;
 
         navigator.clipboard.writeText(textToCopy).then(() => {
-            this.textContent = 'Tersalin!';
-            setTimeout(() => { this.textContent = 'Salin Prompt'; }, 2000);
+            // Sukses: Ubah ikon dan teks
+            icon.className = 'fas fa-check';
+            text.textContent = 'Tersalin!';
+            setTimeout(() => {
+                // Kembalikan ke semula
+                icon.className = 'fas fa-copy';
+                text.textContent = 'Salin Prompt';
+            }, 2000);
         }).catch(err => {
+            // Gagal (Fallback): Pilih semua teks
             console.warn('Gagal salin otomatis, menjalankan fallback (pilih teks). Error:', err);
             try {
                 const selection = window.getSelection();
@@ -336,11 +360,17 @@ Anda adalah seorang Pelatih Pribadi (Personal Trainer) dan Ahli Gizi bersertifik
                 range.selectNodeContents(promptOutput);
                 selection.removeAllRanges();
                 selection.addRange(range);
-                this.textContent = 'Teks Terpilih! (Tekan Ctrl+C)';
-                setTimeout(() => { this.textContent = 'Salin Prompt'; }, 3000);
+                
+                // Ubah teks untuk memberi instruksi
+                icon.className = 'fas fa-copy'; // Ikon tetap copy
+                text.textContent = 'Teks Terpilih! (Tekan Ctrl+C)';
+                setTimeout(() => {
+                    // Kembalikan ke semula
+                    text.textContent = 'Salin Prompt';
+                }, 3000);
             } catch (e) {
                 console.error('Fallback untuk memilih teks juga gagal:', e);
-                this.textContent = 'Gagal';
+                text.textContent = 'Gagal';
             }
         });
     });
