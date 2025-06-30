@@ -7,6 +7,7 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Courier+Prime:wght@400;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
     <style>
         body {
             font-family: 'Courier Prime', 'Courier New', Courier, monospace;
@@ -121,11 +122,11 @@
             padding: 15px;
             border-radius: 4px;
             border: 1px solid #555;
-            user-select: all; /* Membantu pemilihan teks */
+            user-select: all;
         }
         #copy-button {
             margin-top: 15px;
-            background-color: #ff4136; /* Merah */
+            background-color: #ff4136;
             border: 1px solid #ff4136;
             color: #fff;
         }
@@ -139,9 +140,55 @@
             font-size: 14px;
             text-align: center;
         }
+
+        /* LANGKAH 3: CSS UNTUK FLOATING BUTTON */
+        .back-button {
+            position: fixed; /* Kunci agar tombol tetap di posisi yang sama */
+            bottom: 25px;
+            left: 25px;
+            z-index: 1000; /* Memastikan tombol ada di atas konten lain */
+            background-color: #2c2c2c;
+            padding: 10px;
+            border-radius: 50px; /* Membuatnya bulat */
+            border: 1px solid #555;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.3);
+            transition: all 0.3s ease;
+        }
+        .back-button a {
+            display: flex;
+            align-items: center;
+            text-decoration: none;
+            color: #ffffff;
+            font-size: 18px; /* Ukuran Ikon */
+        }
+        .back-button .icon-text {
+            visibility: hidden;
+            opacity: 0;
+            width: 0;
+            margin-left: 0;
+            transition: all 0.3s ease;
+            font-size: 14px; /* Ukuran teks */
+        }
+        .back-button:hover {
+            padding-right: 20px; /* Memberi ruang untuk teks saat hover */
+        }
+        .back-button:hover .icon-text {
+            visibility: visible;
+            opacity: 1;
+            width: auto; /* Lebar otomatis sesuai konten */
+            margin-left: 8px; /* Jarak antara ikon dan teks */
+        }
+
     </style>
 </head>
 <body>
+
+<div class="floating-icon back-button">
+    <a href="https://lexiiz3417.github.io/lchp" target="_blank">
+        <i class="fas fa-chevron-circle-left" style="color: #ffffff;"></i>
+        <span class="icon-text">Back</span>
+    </a>
+</div>
 
 <div class="container">
     <h1>Personal Trainer AI</h1>
@@ -274,18 +321,14 @@ Anda adalah seorang Pelatih Pribadi (Personal Trainer) dan Ahli Gizi bersertifik
         resultContainer.scrollIntoView({ behavior: 'smooth', block: 'end' });
     });
 
-    // --- FUNGSI TOMBOL SALIN YANG DIPERBARUI ---
     copyButton.addEventListener('click', function() {
         const textToCopy = promptOutput.textContent;
         if (!textToCopy) return;
 
-        // Metode 1: Coba salin otomatis (bekerja di HTTPS/localhost)
         navigator.clipboard.writeText(textToCopy).then(() => {
-            // Jika berhasil
             this.textContent = 'Tersalin!';
             setTimeout(() => { this.textContent = 'Salin Prompt'; }, 2000);
         }).catch(err => {
-            // Metode 2: Fallback jika gagal (karena diakses via file://)
             console.warn('Gagal salin otomatis, menjalankan fallback (pilih teks). Error:', err);
             try {
                 const selection = window.getSelection();
@@ -293,10 +336,8 @@ Anda adalah seorang Pelatih Pribadi (Personal Trainer) dan Ahli Gizi bersertifik
                 range.selectNodeContents(promptOutput);
                 selection.removeAllRanges();
                 selection.addRange(range);
-
-                // Beri instruksi ke pengguna
                 this.textContent = 'Teks Terpilih! (Tekan Ctrl+C)';
-                setTimeout(() => { this.textContent = 'Salin Prompt'; }, 3000); // Waktu lebih lama agar terbaca
+                setTimeout(() => { this.textContent = 'Salin Prompt'; }, 3000);
             } catch (e) {
                 console.error('Fallback untuk memilih teks juga gagal:', e);
                 this.textContent = 'Gagal';
@@ -304,10 +345,6 @@ Anda adalah seorang Pelatih Pribadi (Personal Trainer) dan Ahli Gizi bersertifik
         });
     });
 </script>
-<div class="floating-icon back-button"> <!-- Add the 'back-button' class here -->
-    <a href="https://lexiiz3417.github.io/lchp" target="_blank"><i class="fas fa-chevron-circle-left" style="color: #ffffff;"></i>
-        <span class="icon-text">Back</span>
-    </a>
-</div>
+
 </body>
 </html>
