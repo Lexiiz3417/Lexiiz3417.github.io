@@ -1,120 +1,68 @@
 <!DOCTYPE html>
-<html lang="id">
+<html lang="en">
 <head>
-    <meta charset="UTF-8">
+<meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>LCHP Search</title>
-    <link rel="icon" href="lchpfav.png" type="image/png">
-    <link rel="stylesheet" href="lchp.css">
-    <style>
-        /* Sedikit tambahan agar layout search bar tetap rapi */
-        .search-container {
-            display: flex;
-            flex-wrap: wrap; /* Agar responsif di layar kecil */
-            gap: 10px;
-            margin-bottom: 20px;
-        }
-        .search-container > * {
-            flex-grow: 1;
-        }
-        #searchInput {
-            flex-basis: 300px; /* Lebar dasar untuk input search */
-        }
-    </style>
+    <title>LCHP NOTES</title>
+    
+    <!-- Favicon -->
+    <link rel="icon" type="image/png" href="https://lexiiz3417.github.io/lchp/lchpfav.png">
+    
+    <!-- Open Graph meta tags for social sharing -->
+    <meta property="og:title" content="LCHP NOTES">
+    <meta property="og:description" content="Sebuah tempat yang berisi catatan-catatan karya member dan admin LC: Healthy Program">
+    <meta property="og:image" content="https://lexiiz3417.github.io/lchp/lchp.png">
+    <meta property="og:url" content="https://lexiiz3417.github.io">
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+    <link rel="stylesheet" href="https://lexiiz3417.github.io/lchp/lchp.css">
+    <script src="https://lexiiz3417.github.io/lchp/lchp.js"></script>
 </head>
 <body>
-
     <div class="container">
-        <h1>LCHP Search</h1>
-        
+        <h1>LCHP NOTES</h1>
+        <p>Sebuah tempat yang berisi catatan-catatan buatan member dan admin LC: Healthy Program</p>
         <div class="search-container">
-            <input type="text" id="searchInput" placeholder="Cari sesuatu...">
-            <select id="categorySelect" aria-label="Pilih Kategori">
-                <option value="all">di Semua Kategori</option>
-                <option value="notes">di notes</option>
-                <option value="tools">di tools</option>
-            </select>
-            <button id="searchButton">Cari</button>
+            <input type="text" id="searchInput" placeholder="Search notes..." oninput="search()">
         </div>
-
-        <div id="searchResults">
-            <p>Memuat daftar file...</p>
-        </div>
+        <div id="searchResults"></div>
     </div>
 
     <script>
-        // Fungsi utama untuk mengambil dan menampilkan file, sekarang menjadi satu fungsi utama.
-        async function fetchAndDisplayFiles() {
-            const searchTerm = document.getElementById("searchInput").value.toLowerCase();
-            const selectedCategory = document.getElementById("categorySelect").value;
-            const resultsDiv = document.getElementById("searchResults");
-            resultsDiv.innerHTML = '<p>Mencari...</p>';
+        function search() {
+            var searchTerm = document.getElementById("searchInput").value.toLowerCase();
+            var apiUrl = "https://api.github.com/repos/lexiiz3417/lexiiz3417.github.io/contents/lchp";
 
-            const blacklistedFiles = ["index.html", "timesince.js", "lchp.css", "lchp.png", "lchpfav.png", "lchp.js"];
-            const owner = "lexiiz3417";
-            const repo = "lexiiz3417.github.io";
-            const basePath = "lchp";
+            fetch(apiUrl)
+                .then(response => response.json())
+                .then(data => {
+                    var blacklistedFiles = ["index.html", "lchp.js", "timesince.js", "lchp.css", "lchp.png", "lchpfav.png"]; // Nama file yang ingin di-blacklist
+                    var searchResults = data.filter(item => 
+                        item.name.toLowerCase().includes(searchTerm) && 
+                        !blacklistedFiles.includes(item.name) && // Memastikan nama file tidak termasuk dalam daftar blacklistedFiles
+                        item.type === "file" // Memastikan item adalah file, bukan direktori
+                    );
+                    displaySearchResults(searchResults);
+                })
+                .catch(error => console.error('Error:', error));
+        }
 
-            try {
-                const response = await fetch(`https://api.github.com/repos/${owner}/${repo}/git/trees/main?recursive=1`);
-                if (!response.ok) throw new Error(`Gagal mengambil data dari GitHub: ${response.statusText}`);
-                
-                const data = await response.json();
+        function displaySearchResults(results) {
+            var searchResultsContainer = document.getElementById("searchResults");
+            searchResultsContainer.innerHTML = "";
 
-                const searchResults = data.tree.filter(item => {
-                    const isFile = item.type === 'blob';
-                    const isInBasePath = item.path.startsWith(basePath + '/');
-                    const fileName = item.path.split('/').pop();
-                    const isNotBlacklisted = !blacklistedFiles.includes(fileName);
-                    const matchesSearch = item.path.toLowerCase().includes(searchTerm);
-                    const isInSelectedCategory = (selectedCategory === 'all') || item.path.startsWith(`${basePath}/${selectedCategory}/`);
-
-                    return isFile && isInBasePath && isNotBlacklisted && matchesSearch && isInSelectedCategory;
+            if (results.length > 0) {
+                results.forEach(function(result) {
+                    var link = document.createElement("a");
+                    var relativeUrl = result.path.replace("lchp/", "");
+                    link.href = "https://" + window.location.hostname + "/lchp/" + relativeUrl;
+                    link.textContent = result.name.replace('.html', '');
+                    searchResultsContainer.appendChild(link);
                 });
-
-                displaySearchResults(searchResults, basePath);
-
-            } catch (error) {
-                console.error('Error:', error);
-                resultsDiv.innerHTML = '<p style="color:red;">Gagal memuat file. Coba refresh halaman.</p>';
+            } else {
+                searchResultsContainer.textContent = "Tidak ada hasil yang ditemukan";
             }
         }
-
-        // Fungsi untuk merender hasil ke dalam HTML.
-        function displaySearchResults(results, basePath) {
-            const resultsDiv = document.getElementById("searchResults");
-            resultsDiv.innerHTML = "";
-
-            if (results.length === 0) {
-                resultsDiv.innerHTML = "<p>File tidak ditemukan.</p>";
-                return;
-            }
-
-            const list = document.createElement("ul");
-            results.forEach(item => {
-                const listItem = document.createElement("li");
-                const link = document.createElement("a");
-                link.href = `/${item.path}`;
-                link.textContent = item.path.replace(basePath + '/', '');
-                listItem.appendChild(link);
-                list.appendChild(listItem);
-            });
-            resultsDiv.appendChild(list);
-        }
-
-        // --- Event Listeners ---
-        
-        // Menjalankan pencarian saat tombol diklik atau Enter ditekan.
-        document.getElementById("searchButton").addEventListener("click", fetchAndDisplayFiles);
-        document.getElementById("searchInput").addEventListener("keyup", event => {
-            if (event.key === "Enter") fetchAndDisplayFiles();
-        });
-        // Juga menjalankan pencarian saat kategori diubah.
-        document.getElementById("categorySelect").addEventListener("change", fetchAndDdisiplayFiles);
-
-        // --- FUNGSI BARU: Menjalankan fungsi di atas saat halaman pertama kali dimuat ---
-        document.addEventListener('DOMContentLoaded', fetchAndDisplayFiles);
-
     </script>
 
 </body>
